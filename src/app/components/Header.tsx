@@ -75,8 +75,9 @@ export default function Header() {
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             className="sm:hidden flex items-center px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
-                            aria-label="メニューを開く"
+                            aria-label={mobileMenuOpen ? "メニューを閉じる" : "メニューを開く"}
                             aria-expanded={mobileMenuOpen}
+                            aria-controls="mobile-menu"
                         >
                             <svg
                                 className="w-6 h-6"
@@ -107,7 +108,7 @@ export default function Header() {
 
                 {/* モバイルメニュー */}
                 {mobileMenuOpen && (
-                    <nav className="sm:hidden py-4 border-t border-gray-200 dark:border-gray-700">
+                    <nav id="mobile-menu" className="sm:hidden py-4 border-t border-gray-200 dark:border-gray-700">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.href}

@@ -79,6 +79,23 @@ export function calculateCoastFire(input: CoastFireInput): CoastFireResult {
 function validateInput(input: CoastFireInput): void {
   const { targetAmount, targetAge, currentAge, returnRate, inflationRate } = input;
 
+  // 数値の妥当性チェック（NaN / Infinity を排除）
+  if (!Number.isFinite(targetAmount)) {
+    throw new Error('目標資産額には有限の数値を入力してください');
+  }
+  if (!Number.isFinite(currentAge)) {
+    throw new Error('現在の年齢には有限の数値を入力してください');
+  }
+  if (!Number.isFinite(targetAge)) {
+    throw new Error('目標達成年齢には有限の数値を入力してください');
+  }
+  if (!Number.isFinite(returnRate)) {
+    throw new Error('運用利回りには有限の数値を入力してください');
+  }
+  if (!Number.isFinite(inflationRate)) {
+    throw new Error('インフレ率には有限の数値を入力してください');
+  }
+
   // 金額は正の値
   if (targetAmount <= 0) {
     throw new Error('目標資産額は正の値を入力してください');

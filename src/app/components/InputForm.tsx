@@ -47,8 +47,11 @@ export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }
         <input
           type="number"
           id="targetAmount"
-          value={targetAmount}
-          onChange={(e) => setTargetAmount(Number(e.target.value))}
+          value={isNaN(targetAmount) ? '' : targetAmount}
+          onChange={(e) => {
+            const value = e.target.valueAsNumber;
+            setTargetAmount(isNaN(value) ? 0 : value);
+          }}
           min={100}
           max={100000}
           step={100}
@@ -57,7 +60,7 @@ export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }
         />
         <input
           type="range"
-          value={targetAmount}
+          value={isNaN(targetAmount) ? 2000 : targetAmount}
           onChange={(e) => setTargetAmount(Number(e.target.value))}
           min={100}
           max={100000}
@@ -76,8 +79,11 @@ export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }
         <input
           type="number"
           id="currentAge"
-          value={currentAge}
-          onChange={(e) => setCurrentAge(Number(e.target.value))}
+          value={isNaN(currentAge) ? '' : currentAge}
+          onChange={(e) => {
+            const value = e.target.valueAsNumber;
+            setCurrentAge(isNaN(value) ? 0 : value);
+          }}
           min={0}
           max={99}
           className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200"
@@ -94,8 +100,11 @@ export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }
         <input
           type="number"
           id="targetAge"
-          value={targetAge}
-          onChange={(e) => setTargetAge(Number(e.target.value))}
+          value={isNaN(targetAge) ? '' : targetAge}
+          onChange={(e) => {
+            const value = e.target.valueAsNumber;
+            setTargetAge(isNaN(value) ? 0 : value);
+          }}
           min={30}
           max={100}
           className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200"
@@ -103,7 +112,7 @@ export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }
         />
         <input
           type="range"
-          value={targetAge}
+          value={isNaN(targetAge) ? 65 : targetAge}
           onChange={(e) => setTargetAge(Number(e.target.value))}
           min={30}
           max={100}
@@ -121,8 +130,11 @@ export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }
         <input
           type="number"
           id="returnRate"
-          value={returnRate}
-          onChange={(e) => setReturnRate(Number(e.target.value))}
+          value={isNaN(returnRate) ? '' : returnRate}
+          onChange={(e) => {
+            const value = e.target.valueAsNumber;
+            setReturnRate(isNaN(value) ? 0 : value);
+          }}
           min={0}
           max={20}
           step={0.1}
@@ -131,7 +143,7 @@ export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }
         />
         <input
           type="range"
-          value={returnRate}
+          value={isNaN(returnRate) ? 5 : returnRate}
           onChange={(e) => setReturnRate(Number(e.target.value))}
           min={0}
           max={20}
@@ -150,8 +162,11 @@ export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }
         <input
           type="number"
           id="inflationRate"
-          value={inflationRate}
-          onChange={(e) => setInflationRate(Number(e.target.value))}
+          value={isNaN(inflationRate) ? '' : inflationRate}
+          onChange={(e) => {
+            const value = e.target.valueAsNumber;
+            setInflationRate(isNaN(value) ? 0 : value);
+          }}
           min={0}
           max={10}
           step={0.1}
@@ -160,7 +175,7 @@ export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }
         />
         <input
           type="range"
-          value={inflationRate}
+          value={isNaN(inflationRate) ? 2 : inflationRate}
           onChange={(e) => setInflationRate(Number(e.target.value))}
           min={0}
           max={10}
