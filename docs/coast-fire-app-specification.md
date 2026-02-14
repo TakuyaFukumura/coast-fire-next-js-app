@@ -28,21 +28,28 @@ Coast FIRE（Coast Financial Independence, Retire Early）計算アプリは、�
 
 #### 2.1.2 バリデーションルール
 - 目標達成年齢 > 現在の年齢
-- すべての数値は正の値
+- 金額と年齢は正の値、パーセンテージは0以上の値
 - パーセンテージは小数点第2位まで入力可能
 - 金額は万円単位で入力
 
 ### 2.2 計算機能
 
+#### 2.2.0 重要な前提条件
+本アプリでは、ユーザーが設定する「目標資産額」は**現在の購買力ベース**での目標額を意味します。つまり、「65歳時点で今の物価感で2,000万円分の購買力が欲しい」という場合、目標資産額を2,000万円と設定します。
+
+この場合、インフレを考慮すると、実際には65歳時点でより多くの名目金額（例：インフレ率2%で37年後なら約4,100万円）が必要になりますが、その「インフレ調整後の実質価値」が目標の2,000万円となります。
+
 #### 2.2.1 現在必要な資産額の計算
-Coast FIREの核となる計算式：
+Coast FIREの核となる計算式（目標額は現在価値ベース）：
 
 ```
-現在必要な資産額 = 目標資産額 / (1 + 実質利回り)^運用年数
+現在必要な資産額 = 目標資産額（現在価値） / (1 + 実質利回り)^運用年数
 
 実質利回り = (1 + 運用利回り) / (1 + インフレ率) - 1
 運用年数 = 目標達成年齢 - 現在の年齢
 ```
+
+この計算により、現時点で必要な資産額を求めます。この資産を運用利回りで運用すると、目標年齢時点での「インフレ調整後価値」が目標額に達します。
 
 #### 2.2.2 年齢ごとの資産推移計算
 各年齢における資産額を計算：
@@ -54,11 +61,13 @@ Coast FIREの核となる計算式：
 ```
 
 #### 2.2.3 インフレ調整後価値の計算
-将来の購買力を現在価値に換算：
+将来の名目資産額を現在の購買力に換算：
 
 ```
 インフレ調整後価値 = 各年の資産額 / (1 + インフレ率)^経過年数
 ```
+
+**重要：** 目標年齢（例：65歳）時点でのインフレ調整後価値は、設定した目標資産額（例：2,000万円）と一致します。これにより「今の物価感で2,000万円分の購買力」が実現されます。
 
 ### 2.3 表示機能
 
@@ -76,10 +85,13 @@ Coast FIREの核となる計算式：
 │                                          │
 │       812万円                            │
 │                                          │
-│  目標: 2,000万円（65歳時点）              │
+│  目標: 2,000万円（現在価値、65歳時点）     │
 │  運用期間: 37年                          │
+│  ※65歳時の名目額: 約4,104万円            │
 └─────────────────────────────────────────┘
 ```
+
+**注記：** 目標額は「現在の購買力ベース」での金額です。インフレを考慮すると、65歳時点での実際の名目金額はより大きくなります。
 
 #### 2.3.2 資産推移グラフ（グラフエリア）
 **仕様：**
@@ -98,13 +110,15 @@ Coast FIREの核となる計算式：
 #### 2.3.3 詳細データテーブル（テーブルエリア）
 グラフ下部に年齢ごとの詳細データを表形式で表示：
 
-| 年齢 | 資産額 | インフレ調整後価値 | 実質利回り累計 |
-|-----|-------|-----------------|--------------|
+| 年齢 | 資産額（名目） | インフレ調整後価値（実質） | 実質利回り累計 |
+|-----|-------------|----------------------|--------------|
 | 28歳 | 812万円 | 812万円 | 0% |
-| 29歳 | 853万円 | 829万円 | 2.1% |
-| 30歳 | 895万円 | 846万円 | 4.2% |
+| 29歳 | 853万円 | 836万円 | 3.0% |
+| 30歳 | 895万円 | 860万円 | 5.9% |
 | ... | ... | ... | ... |
-| 65歳 | 2,000万円 | 978万円 | 146.3% |
+| 65歳 | 4,104万円 | 2,000万円 | 146.3% |
+
+**注記：** 目標は「現在価値で2,000万円」であり、65歳時点のインフレ調整後価値が2,000万円になります。インフレ率2%で37年後の名目額は約4,104万円になります。
 
 **テーブル機能：**
 - ページネーション（10行ずつ表示）
@@ -142,35 +156,36 @@ Coast FIREの核となる計算式：
 
 ### 3.2 ファイル構成案
 ```
-src/
-├── app/
-│   ├── coast-fire/
-│   │   ├── page.tsx              # Coast FIREメインページ
-│   │   └── layout.tsx            # Coast FIREレイアウト
-│   └── components/
-│       ├── CoastFireCalculator.tsx    # 計算ロジックコンポーネント
-│       ├── ResultDisplay.tsx          # 計算結果表示
-│       ├── AssetChart.tsx             # 資産推移グラフ
-│       ├── AssetTable.tsx             # 詳細データテーブル
-│       └── InputForm.tsx              # 入力フォーム
+./
 ├── lib/
-│   └── coastFireCalculations.ts  # 計算ロジック関数
-└── types/
-    └── coastFire.ts              # 型定義
+│   └── coastFireCalculations.ts      # 計算ロジック関数（既存のルート直下 lib/ 配下）
+└── src/
+    ├── app/
+    │   ├── coast-fire/
+    │   │   ├── page.tsx              # Coast FIREメインページ
+    │   │   └── layout.tsx            # Coast FIREレイアウト（オプション）
+    │   └── components/
+    │       ├── CoastFireCalculator.tsx    # 計算ロジックコンポーネント
+    │       ├── ResultDisplay.tsx          # 計算結果表示
+    │       ├── AssetChart.tsx             # 資産推移グラフ
+    │       ├── AssetTable.tsx             # 詳細データテーブル
+    │       └── InputForm.tsx              # 入力フォーム
+    └── types/
+        └── coastFire.ts              # 型定義（新規作成ディレクトリ）
 ```
 
 ### 3.3 計算ロジック実装（coastFireCalculations.ts）
 ```typescript
 export interface CoastFireInput {
-  targetAmount: number;        // 目標資産額（円）
+  targetAmount: number;        // 目標資産額（万円単位での入力値、内部では円に変換して計算）
   targetAge: number;            // 目標達成年齢
   currentAge: number;           // 現在の年齢
-  returnRate: number;           // 運用利回り（小数）
-  inflationRate: number;        // インフレ率（小数）
+  returnRate: number;           // 運用利回り（小数、例: 0.05 = 5%）
+  inflationRate: number;        // インフレ率（小数、例: 0.02 = 2%）
 }
 
 export interface CoastFireResult {
-  requiredAmount: number;       // 現在必要な資産額
+  requiredAmount: number;       // 現在必要な資産額（万円）
   yearlyData: YearlyData[];     // 年齢ごとのデータ
   realReturnRate: number;       // 実質利回り
   investmentYears: number;      // 運用年数
@@ -178,15 +193,22 @@ export interface CoastFireResult {
 
 export interface YearlyData {
   age: number;                  // 年齢
-  amount: number;               // 資産額
-  inflationAdjusted: number;    // インフレ調整後価値
+  amount: number;               // 資産額（名目、万円）
+  inflationAdjusted: number;    // インフレ調整後価値（実質、万円）
   realReturn: number;           // 実質利回り累計
 }
 
 export function calculateCoastFire(input: CoastFireInput): CoastFireResult {
   // 計算ロジック実装
+  // 注: targetAmountは現在価値ベースの目標額
+  // 目標年齢でのinflationAdjustedがtargetAmountと一致するように計算
 }
 ```
+
+**計算の流れ：**
+1. ユーザーは万円単位で入力（例：2000万円）
+2. 内部計算は万円のまま実施（精度十分）
+3. 表示も万円単位で行う
 
 ### 3.4 パフォーマンス要件
 - 初回レンダリング：2秒以内
@@ -289,9 +311,9 @@ Coast FIREとは、現時点である程度の資産を確保すれば、その�
 
 ### 9.3 関連リンク
 - [FIRE（Financial Independence Retire Early）とは](https://ja.wikipedia.org/wiki/FIRE%E3%83%A0%E3%83%BC%E3%83%96%E3%83%A1%E3%83%B3%E3%83%88)
-- Next.js公式ドキュメント
-- Recharts公式ドキュメント
-- Tailwind CSS公式ドキュメント
+- [Next.js公式ドキュメント](https://nextjs.org/docs)
+- [Recharts公式ドキュメント](https://recharts.org/)
+- [Tailwind CSS公式ドキュメント](https://tailwindcss.com/docs)
 
 ## 10. 用語集
 
