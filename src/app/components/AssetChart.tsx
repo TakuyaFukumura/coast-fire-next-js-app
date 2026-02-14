@@ -9,11 +9,17 @@ interface AssetChartProps {
 }
 
 export default function AssetChart({ yearlyData }: AssetChartProps) {
-  // グラフ用のデータを準備（5年ごとにデータポイントを表示）
-  const chartData = yearlyData.filter((_, index) => index % 5 === 0 || index === yearlyData.length - 1);
-
   // カスタムツールチップ
-  const CustomTooltip = ({ active, payload }: any) => {
+  interface TooltipPayload {
+    payload: YearlyData;
+  }
+
+  interface CustomTooltipProps {
+    active?: boolean;
+    payload?: TooltipPayload[];
+  }
+
+  const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
