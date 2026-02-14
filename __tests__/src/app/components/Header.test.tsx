@@ -11,6 +11,11 @@ import {DarkModeProvider} from '@/app/components/DarkModeProvider';
 import Header from '../../../../src/app/components/Header';
 import '@testing-library/jest-dom';
 
+// usePathname をモック
+jest.mock('next/navigation', () => ({
+    usePathname: jest.fn(() => '/'),
+}));
+
 describe('Header', () => {
     const renderWithProvider = (initialTheme?: 'light' | 'dark') => {
         if (initialTheme) {
@@ -42,7 +47,7 @@ describe('Header', () => {
         it('テーマ切り替えボタンが表示される', () => {
             renderWithProvider();
 
-            const button = screen.getByRole('button');
+            const button = screen.getByRole('button', {name: /ライトモード|ダークモード/});
             expect(button).toBeInTheDocument();
         });
     });
@@ -63,7 +68,7 @@ describe('Header', () => {
         it('ボタンのtitle属性が正しく設定される', () => {
             renderWithProvider('light');
 
-            const button = screen.getByRole('button');
+            const button = screen.getByRole('button', {name: /ライトモード/});
             expect(button).toHaveAttribute('title', '現在: ライトモード');
         });
     });
@@ -86,7 +91,7 @@ describe('Header', () => {
         it('ボタンのtitle属性が正しく設定される', () => {
             renderWithProvider('dark');
 
-            const button = screen.getByRole('button');
+            const button = screen.getByRole('button', {name: /ダークモード/});
             expect(button).toHaveAttribute('title', '現在: ダークモード');
         });
     });
@@ -101,7 +106,7 @@ describe('Header', () => {
             expect(screen.getByText('ライトモード')).toBeInTheDocument();
 
             // ボタンをクリック
-            const button = screen.getByRole('button');
+            const button = screen.getByRole('button', {name: /ライトモード/});
             fireEvent.click(button);
 
             // ダークモードに変更されたことを確認
@@ -117,7 +122,7 @@ describe('Header', () => {
             expect(screen.getByText('ダークモード')).toBeInTheDocument();
 
             // ボタンをクリック
-            const button = screen.getByRole('button');
+            const button = screen.getByRole('button', {name: /ダークモード/});
             fireEvent.click(button);
 
             // ライトモードに変更されたことを確認
@@ -128,17 +133,19 @@ describe('Header', () => {
         it('複数回のクリックで正しく切り替わる', () => {
             renderWithProvider('light');
 
-            const button = screen.getByRole('button');
+            let button = screen.getByRole('button', {name: /ライトモード/});
 
             // ライトモード → ダークモード
             fireEvent.click(button);
             expect(screen.getByText('🌙')).toBeInTheDocument();
 
             // ダークモード → ライトモード
+            button = screen.getByRole('button', {name: /ダークモード/});
             fireEvent.click(button);
             expect(screen.getByText('☀️')).toBeInTheDocument();
 
             // ライトモード → ダークモード
+            button = screen.getByRole('button', {name: /ライトモード/});
             fireEvent.click(button);
             expect(screen.getByText('🌙')).toBeInTheDocument();
         });
@@ -148,7 +155,7 @@ describe('Header', () => {
         it('ボタンがキーボードでアクセス可能', () => {
             renderWithProvider();
 
-            const button = screen.getByRole('button');
+            const button = screen.getByRole('button', {name: /ライトモード|ダークモード/});
             expect(button).toBeInTheDocument();
 
             // タブキーでフォーカス可能かを確認
@@ -159,7 +166,7 @@ describe('Header', () => {
         it('適切なaria属性が設定されている', () => {
             renderWithProvider();
 
-            const button = screen.getByRole('button');
+            const button = screen.getByRole('button', {name: /ライトモード|ダークモード/});
 
             // title属性による説明があることを確認
             expect(button).toHaveAttribute('title');
@@ -197,8 +204,69 @@ describe('Header', () => {
         it('ボタンに適切なスタイルクラスが適用される', () => {
             renderWithProvider();
 
-            const button = screen.getByRole('button');
+            const button = screen.getByRole('button', {name: /ライトモード|ダークモード/});
             expect(button).toHaveClass('flex', 'items-center', 'gap-2');
+        });
+    });
+
+    describe('ナビゲーション機能', () => {
+        it('ナビゲーションリンクが表示される', () => {
+            renderWithProvider();
+
+            expect(screen.getByRole('link', {name: 'ホーム'})).toBeInTheDocument();
+            expect(screen.getByRole('link', {name: 'Coast FIRE 計算機'})).toBeInTheDocument();
+        });
+
+        it('アクティブなリンクにaria-current="page"が設定される', () => {
+            renderWithProvider();
+
+            const homeLink = screen.getByRole('link', {name: 'ホーム'});
+            expect(homeLink).toHaveAttribute('aria-current', 'page');
+        });
+
+        it('モバイルメニューボタンが表示される', () => {
+            renderWithProvider();
+
+            const menuButton = screen.getByRole('button', {name: 'メニューを開く'});
+            expect(menuButton).toBeInTheDocument();
+            expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+        });
+
+        it('モバイルメニューをクリックすると開閉する', () => {
+            renderWithProvider();
+
+            const menuButton = screen.getByRole('button', {name: 'メニューを開く'});
+            
+            // メニューを開く
+            fireEvent.click(menuButton);
+            
+            // メニューが開いていることを確認
+            const updatedButton = screen.getByRole('button', {name: 'メニューを閉じる'});
+            expect(updatedButton).toHaveAttribute('aria-expanded', 'true');
+            expect(updatedButton).toHaveAttribute('aria-controls', 'mobile-menu');
+            
+            // ナビゲーションリンクが表示されることを確認
+            const mobileNav = screen.getAllByRole('navigation').find(nav => nav.id === 'mobile-menu');
+            expect(mobileNav).toBeInTheDocument();
+        });
+
+        it('モバイルメニュー内のリンクをクリックするとメニューが閉じる', () => {
+            renderWithProvider();
+
+            // メニューを開く
+            const menuButton = screen.getByRole('button', {name: 'メニューを開く'});
+            fireEvent.click(menuButton);
+            
+            // メニュー内のリンクをクリック
+            const links = screen.getAllByRole('link', {name: 'ホーム'});
+            const mobileLink = links.find(link => link.closest('#mobile-menu'));
+            if (mobileLink) {
+                fireEvent.click(mobileLink);
+            }
+            
+            // メニューが閉じていることを確認
+            const closedButton = screen.getByRole('button', {name: 'メニューを開く'});
+            expect(closedButton).toHaveAttribute('aria-expanded', 'false');
         });
     });
 });
