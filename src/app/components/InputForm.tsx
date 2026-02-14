@@ -68,7 +68,7 @@ export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }
           value={targetAmount}
           onChange={(e) => setTargetAmount(Number(e.target.value))}
           min={100}
-          max={10000}
+          max={100000}
           step={100}
           className="w-full"
         />
