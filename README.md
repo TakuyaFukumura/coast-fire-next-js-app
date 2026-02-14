@@ -1,4 +1,4 @@
-# basic-next-js-app
+# coast-fire-next-js-app
 
 Next.jsを使ったシンプルな「Hello, world.」アプリケーションです。
 このプロジェクトは、SQLiteデータベースからメッセージを取得して表示する基本的な機能を提供します。
@@ -33,10 +33,10 @@ Next.jsを使ったシンプルな「Hello, world.」アプリケーションで
 
 1. リポジトリをクローン：
     ```bash
-    git clone https://github.com/TakuyaFukumura/basic-next-js-app.git
+    git clone https://github.com/TakuyaFukumura/coast-fire-next-js-app.git
     ```
     ```bash
-    cd basic-next-js-app
+    cd coast-fire-next-js-app
     ```
 
 2. 依存関係をインストール：
