@@ -177,7 +177,7 @@ Coast FIREの核となる計算式（目標額は現在価値ベース）：
 ### 3.3 計算ロジック実装（coastFireCalculations.ts）
 ```typescript
 export interface CoastFireInput {
-  targetAmount: number;        // 目標資産額（万円単位での入力値、内部では円に変換して計算）
+  targetAmount: number;        // 目標資産額（万円単位での入力値）
   targetAge: number;            // 目標達成年齢
   currentAge: number;           // 現在の年齢
   returnRate: number;           // 運用利回り（小数、例: 0.05 = 5%）
