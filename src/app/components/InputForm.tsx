@@ -1,20 +1,12 @@
 'use client';
 
-import { CoastFireInput } from '@/types/coastFire';
+import { CoastFireInput, DEFAULT_INPUT } from '@/types/coastFire';
 import { useState } from 'react';
 
 interface InputFormProps {
   onCalculate: (input: CoastFireInput) => void;
   defaultValues?: CoastFireInput;
 }
-
-const DEFAULT_INPUT: CoastFireInput = {
-  targetAmount: 2000, // 2000万円
-  targetAge: 65,
-  currentAge: 28,
-  returnRate: 0.05, // 5%
-  inflationRate: 0.02, // 2%
-};
 
 export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }: InputFormProps) {
   const [targetAmount, setTargetAmount] = useState(defaultValues.targetAmount);
@@ -71,6 +63,7 @@ export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }
           max={100000}
           step={100}
           className="w-full"
+          aria-label="目標資産額（万円）"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 100万円〜10億円</p>
       </div>
@@ -115,6 +108,7 @@ export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }
           min={30}
           max={100}
           className="w-full"
+          aria-label="目標達成年齢"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 30歳〜100歳</p>
       </div>
@@ -143,6 +137,7 @@ export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }
           max={20}
           step={0.1}
           className="w-full"
+          aria-label="運用利回り（%）"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 0%〜20%</p>
       </div>
@@ -171,6 +166,7 @@ export default function InputForm({ onCalculate, defaultValues = DEFAULT_INPUT }
           max={10}
           step={0.1}
           className="w-full"
+          aria-label="インフレ率（%）"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 0%〜10%</p>
       </div>

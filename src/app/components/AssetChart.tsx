@@ -3,6 +3,7 @@
 import { YearlyData } from '@/types/coastFire';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { formatAmount } from '../../../lib/coastFireCalculations';
+import { useCallback } from 'react';
 
 interface AssetChartProps {
   yearlyData: YearlyData[];
@@ -19,7 +20,7 @@ export default function AssetChart({ yearlyData }: AssetChartProps) {
     payload?: TooltipPayload[];
   }
 
-  const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
+  const CustomTooltip = useCallback(({ active, payload }: CustomTooltipProps) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
@@ -38,17 +39,17 @@ export default function AssetChart({ yearlyData }: AssetChartProps) {
       );
     }
     return null;
-  };
+  }, []);
 
   // Y軸のフォーマット関数
-  const formatYAxis = (value: number) => {
+  const formatYAxis = useCallback((value: number) => {
     if (value >= 10000) {
       return `${(value / 10000).toFixed(0)}億円`;
     } else if (value >= 1000) {
       return `${(value / 1000).toFixed(0)}千万円`;
     }
     return `${value}万円`;
-  };
+  }, []);
 
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">

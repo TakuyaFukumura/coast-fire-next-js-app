@@ -1,20 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { CoastFireInput, CoastFireResult } from '@/types/coastFire';
+import { CoastFireInput, CoastFireResult, DEFAULT_INPUT } from '@/types/coastFire';
 import { calculateCoastFire } from '../../../lib/coastFireCalculations';
 import InputForm from './InputForm';
 import ResultDisplay from './ResultDisplay';
 import AssetChart from './AssetChart';
 import AssetTable from './AssetTable';
-
-const DEFAULT_INPUT: CoastFireInput = {
-  targetAmount: 2000,
-  targetAge: 65,
-  currentAge: 28,
-  returnRate: 0.05,
-  inflationRate: 0.02,
-};
 
 export default function CoastFireCalculator() {
   const [input, setInput] = useState<CoastFireInput>(DEFAULT_INPUT);

@@ -89,14 +89,14 @@ function validateInput(input: CoastFireInput): void {
     throw new Error('目標資産額は100万円から10億円の範囲で入力してください');
   }
 
-  // 年齢は正の値
-  if (currentAge < 0 || targetAge < 0) {
-    throw new Error('年齢は0以上の値を入力してください');
-  }
-
   // 現在の年齢の範囲チェック（0歳〜99歳）
   if (currentAge < 0 || currentAge > 99) {
     throw new Error('現在の年齢は0歳から99歳の範囲で入力してください');
+  }
+
+  // 目標達成年齢は正の値
+  if (targetAge < 0) {
+    throw new Error('目標達成年齢は0以上の値を入力してください');
   }
 
   // 目標達成年齢 > 現在の年齢（先にこのチェックを行う）
@@ -107,11 +107,6 @@ function validateInput(input: CoastFireInput): void {
   // 目標達成年齢の範囲チェック（30歳〜100歳）
   if (targetAge < 30 || targetAge > 100) {
     throw new Error('目標達成年齢は30歳から100歳の範囲で入力してください');
-  }
-
-  // パーセンテージは0以上の値
-  if (returnRate < 0 || inflationRate < 0) {
-    throw new Error('利回りとインフレ率は0以上の値を入力してください');
   }
 
   // 運用利回りの範囲チェック（0%〜20%）

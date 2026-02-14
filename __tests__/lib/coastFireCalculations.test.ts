@@ -166,7 +166,7 @@ describe('Coast FIRE Calculations', () => {
           inflationRate: 0.02,
         };
 
-        expect(() => calculateCoastFire(input)).toThrow('年齢は0以上の値を入力してください');
+        expect(() => calculateCoastFire(input)).toThrow('現在の年齢は0歳から99歳の範囲で入力してください');
       });
 
       it('現在の年齢が範囲外の場合エラー', () => {
@@ -202,7 +202,7 @@ describe('Coast FIRE Calculations', () => {
           inflationRate: 0.02,
         };
 
-        expect(() => calculateCoastFire(input)).toThrow('利回りとインフレ率は0以上の値を入力してください');
+        expect(() => calculateCoastFire(input)).toThrow('運用利回りは0%から20%の範囲で入力してください');
       });
 
       it('運用利回りが範囲外の場合エラー', () => {

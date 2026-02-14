@@ -28,7 +28,7 @@ export interface YearlyData {
   amount: number;
   /** インフレ調整後価値（実質、万円） */
   inflationAdjusted: number;
-  /** 実質利回り累計（%） */
+  /** 実質利回り累計（%） - 開始時点からの累積実質リターン */
   realReturn: number;
 }
 
@@ -47,3 +47,15 @@ export interface CoastFireResult {
   /** 目標年齢時点での名目資産額（万円） */
   targetNominalAmount: number;
 }
+
+/**
+ * デフォルトの入力値
+ */
+export const DEFAULT_INPUT: CoastFireInput = {
+  targetAmount: 2000, // 2000万円
+  targetAge: 65,
+  currentAge: 28,
+  returnRate: 0.05, // 5%
+  inflationRate: 0.02, // 2%
+};
+
