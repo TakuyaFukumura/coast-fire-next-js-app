@@ -248,5 +248,5 @@ const navLinks = [
 
 ## 10. 参考情報
 
-- [Next.js App Router - Redirecting](https://nextjs.org/docs/app/building-your-application/routing/redirecting)
-- [Next.js Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware)
+- [Next.js App Router - Redirecting](https://nextjs.org/docs/app/building-your-application/routing/redirecting) - セクション5.1のリダイレクト実装（オプションA）に関連
+- [Next.js Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) - セクション5.1のリダイレクト実装（オプションB）に関連
