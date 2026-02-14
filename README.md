@@ -1,7 +1,6 @@
-# basic-next-js-app
+# coast-fire-next-js-app
 
-Next.jsを使ったシンプルな「Hello, world.」アプリケーションです。
-このプロジェクトは、SQLiteデータベースからメッセージを取得して表示する基本的な機能を提供します。
+Next.jsを使ったシンプルなアプリケーションです。
 
 ## 技術スタック
 
@@ -11,16 +10,6 @@ Next.jsを使ったシンプルな「Hello, world.」アプリケーションで
 - **Tailwind CSS 4** - スタイリング
 - **SQLite** - データベース（better-sqlite3）
 - **ESLint** - コード品質管理
-
-## 機能
-
-- SQLiteデータベースから「Hello, world.」メッセージを取得
-- レスポンシブデザイン対応  
-- ダークモード対応（手動切替機能付き）
-  - ライトモードとダークモードの2つのモードを手動で切り替え可能
-  - ユーザーの選択はローカルストレージに保存され、ページ再読み込み時も維持されます
-- TypeScriptによる型安全性
-- モダンなUI/UXデザイン
 
 ## 始め方
 
@@ -33,10 +22,10 @@ Next.jsを使ったシンプルな「Hello, world.」アプリケーションで
 
 1. リポジトリをクローン：
     ```bash
-    git clone https://github.com/TakuyaFukumura/basic-next-js-app.git
+    git clone https://github.com/TakuyaFukumura/coast-fire-next-js-app.git
     ```
     ```bash
-    cd basic-next-js-app
+    cd coast-fire-next-js-app
     ```
 
 2. 依存関係をインストール：
