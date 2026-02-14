@@ -216,11 +216,22 @@ describe('Header', () => {
             expect(screen.getByRole('link', {name: 'Coast FIRE 計算機'})).toBeInTheDocument();
         });
 
-        it('アクティブなリンクにaria-current="page"が設定される', () => {
+        it('ホームページ（/）ではaria-current属性が設定されない', () => {
             renderWithProvider();
 
             const coastFireLink = screen.getAllByRole('link', {name: 'Coast FIRE 計算機'})[0];
             expect(coastFireLink).not.toHaveAttribute('aria-current');
+        });
+
+        it('Coast FIREページ（/coast-fire）ではaria-current="page"が設定される', () => {
+            // usePathname を /coast-fire に変更
+            const {usePathname} = require('next/navigation');
+            usePathname.mockReturnValue('/coast-fire');
+
+            renderWithProvider();
+
+            const coastFireLink = screen.getAllByRole('link', {name: 'Coast FIRE 計算機'})[0];
+            expect(coastFireLink).toHaveAttribute('aria-current', 'page');
         });
 
         it('モバイルメニューボタンが表示される', () => {
