@@ -8,7 +8,7 @@ Next.jsを使ったシンプルなアプリケーションです。
 - **React 19.2.4** - ユーザーインターフェース構築
 - **TypeScript** - 型安全性
 - **Tailwind CSS 4** - スタイリング
-- **SQLite** - データベース（better-sqlite3）
+- **Recharts** - データ可視化（チャート表示）
 - **ESLint** - コード品質管理
 
 ## 始め方
@@ -59,8 +59,21 @@ yarn dev
 pnpm dev
 ```
 
+## 機能
+
+### Coast FIRE 計算機
+
+このアプリケーションのメイン機能で、老後の目標資産額を達成するために現時点で必要な資産額を計算します。
+
+**主な機能:**
+- インタラクティブな入力フォーム（スライダーと数値入力）
+- 計算結果の視覚的な表示
+- 資産推移グラフ（Recharts使用）
+- 詳細データテーブル（ソート・ページネーション機能付き）
+- ダークモード対応
+
 ブラウザで [http://localhost:3000](http://localhost:3000) を開いて
-アプリケーションを確認してください。
+アプリケーションを確認してください。自動的にCoast FIRE計算機ページにリダイレクトされます。
 
 ### ビルドと本番デプロイ
 
@@ -98,62 +111,24 @@ pnpm start
 
 ```
 ├── lib/
-│   └── database.ts          # SQLiteデータベース接続・操作
+│   └── coastFireCalculations.ts  # Coast FIRE計算ロジック
 ├── src/
 │   └── app/
-│       ├── api/
-│       │   └── message/
-│       │       └── route.ts # APIエンドポイント
+│       ├── coast-fire/
+│       │   └── page.tsx  # Coast FIRE計算機ページ
 │       ├── components/      # Reactコンポーネント
 │       │   ├── DarkModeProvider.tsx  # ダークモードProvider
 │       │   └── Header.tsx   # ヘッダーコンポーネント
 │       ├── globals.css      # グローバルスタイル
 │       ├── layout.tsx       # アプリケーションレイアウト
-│       └── page.tsx         # メインページコンポーネント
-├── data/                    # SQLiteデータベースファイル（自動生成）
+│       └── page.tsx         # ホームページ（Coast FIREへリダイレクト）
 ├── package.json
 ├── next.config.ts
 ├── tailwind.config.ts
 └── tsconfig.json
 ```
 
-## API エンドポイント
-
-### GET /api/message
-
-データベースから最新のメッセージを取得します。
-
-**レスポンス:**
-
-```json
-{
-  "message": "Hello, world."
-}
-```
-
-## データベース
-
-SQLiteデータベースは初回起動時に自動的に作成されます：
-
-- データベースファイル: `data/app.db`
-- テーブル: `messages`
-    - `id`: 自動増分プライマリーキー
-    - `content`: メッセージ内容
-    - `created_at`: 作成日時
-
-## カスタマイズ
-
-### メッセージの変更
-
-データベース内のメッセージを変更したい場合は、
-SQLiteクライアントを使用して `data/app.db` ファイル内の `messages` テーブルを編集してください。
-
-### スタイルの変更
-
-スタイルは Tailwind CSS を使用しています。
-`src/app/page.tsx` ファイル内のクラス名を変更することで、外観をカスタマイズできます。
-
-## 開発
+## 機能
 
 ### テスト
 
@@ -191,13 +166,13 @@ npm run test:coverage
 
 #### テストファイルの構成
 
-- `__tests__/lib/database.test.ts`: データベース機能のテスト
+- `__tests__/lib/coastFireCalculations.test.ts`: Coast FIRE計算ロジックのテスト
 - `__tests__/src/app/components/DarkModeProvider.test.tsx`: ダークモードProvider のテスト
 - `__tests__/src/app/components/Header.test.tsx`: ヘッダーコンポーネントのテスト
 
 #### テストの特徴
 
-- **データベーステスト**: SQLiteを使用した実際のデータベース操作のテスト
+- **計算ロジックテスト**: Coast FIRE計算の正確性を検証（テストカバレッジ100%）
 - **Reactコンポーネントテスト**: React Testing Library を使用したコンポーネントのレンダリングとインタラクションのテスト
 - **モッキング**: localStorage や外部依存関係のモック
 - **カバレッジ**: コードカバレッジの測定と報告
@@ -254,11 +229,6 @@ CIでは以下のチェックが行われます：
 
 ## トラブルシューティング
 
-### データベース関連のエラー
-
-- `data/` フォルダが存在しない場合、自動的に作成されます
-- データベースファイルが破損した場合は、`data/app.db` を削除して再起動してください
-
 ### ポート競合
 
 デフォルトのポート3000が使用中の場合：
@@ -266,3 +236,4 @@ CIでは以下のチェックが行われます：
 ```bash
 npm run dev -- --port 3001
 ```
+

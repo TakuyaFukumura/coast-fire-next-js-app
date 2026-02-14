@@ -7,6 +7,21 @@
 
 ## [Unreleased]
 
+### 削除
+
+- ホーム画面を削除し、ルートパスから Coast FIRE 計算機ページへのリダイレクトを実装
+- SQLite データベース関連機能の削除
+  - `lib/database.ts`
+  - `src/app/api/message/route.ts`
+  - データベース関連の依存関係（`better-sqlite3`, `@types/better-sqlite3`）
+- ヘッダーのナビゲーションから「ホーム」リンクを削除
+- 実装後不要になった検討ドキュメント（`docs/home-screen-removal-consideration.md`）
+
+### 変更
+
+- ヘッダーのロゴリンク先を `/` から `/coast-fire` に変更
+- アプリケーションのメイン機能である Coast FIRE 計算機に直接アクセス可能に
+
 ## [0.2.0] - 2026-02-14
 
 ### 追加

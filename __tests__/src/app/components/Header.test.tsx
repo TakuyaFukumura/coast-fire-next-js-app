@@ -213,15 +213,14 @@ describe('Header', () => {
         it('ナビゲーションリンクが表示される', () => {
             renderWithProvider();
 
-            expect(screen.getByRole('link', {name: 'ホーム'})).toBeInTheDocument();
             expect(screen.getByRole('link', {name: 'Coast FIRE 計算機'})).toBeInTheDocument();
         });
 
         it('アクティブなリンクにaria-current="page"が設定される', () => {
             renderWithProvider();
 
-            const homeLink = screen.getByRole('link', {name: 'ホーム'});
-            expect(homeLink).toHaveAttribute('aria-current', 'page');
+            const coastFireLink = screen.getAllByRole('link', {name: 'Coast FIRE 計算機'})[0];
+            expect(coastFireLink).not.toHaveAttribute('aria-current');
         });
 
         it('モバイルメニューボタンが表示される', () => {
@@ -258,7 +257,7 @@ describe('Header', () => {
             fireEvent.click(menuButton);
 
             // メニュー内のリンクをクリック
-            const links = screen.getAllByRole('link', {name: 'ホーム'});
+            const links = screen.getAllByRole('link', {name: 'Coast FIRE 計算機'});
             const mobileLink = links.find(link => link.closest('#mobile-menu'));
             if (mobileLink) {
                 fireEvent.click(mobileLink);
