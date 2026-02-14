@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import {render, screen, fireEvent} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import {DarkModeProvider} from '@/app/components/DarkModeProvider';
 import Header from '../../../../src/app/components/Header';
 import '@testing-library/jest-dom';
@@ -236,15 +236,15 @@ describe('Header', () => {
             renderWithProvider();
 
             const menuButton = screen.getByRole('button', {name: 'メニューを開く'});
-            
+
             // メニューを開く
             fireEvent.click(menuButton);
-            
+
             // メニューが開いていることを確認
             const updatedButton = screen.getByRole('button', {name: 'メニューを閉じる'});
             expect(updatedButton).toHaveAttribute('aria-expanded', 'true');
             expect(updatedButton).toHaveAttribute('aria-controls', 'mobile-menu');
-            
+
             // ナビゲーションリンクが表示されることを確認
             const mobileNav = screen.getAllByRole('navigation').find(nav => nav.id === 'mobile-menu');
             expect(mobileNav).toBeInTheDocument();
@@ -256,14 +256,14 @@ describe('Header', () => {
             // メニューを開く
             const menuButton = screen.getByRole('button', {name: 'メニューを開く'});
             fireEvent.click(menuButton);
-            
+
             // メニュー内のリンクをクリック
             const links = screen.getAllByRole('link', {name: 'ホーム'});
             const mobileLink = links.find(link => link.closest('#mobile-menu'));
             if (mobileLink) {
                 fireEvent.click(mobileLink);
             }
-            
+
             // メニューが閉じていることを確認
             const closedButton = screen.getByRole('button', {name: 'メニューを開く'});
             expect(closedButton).toHaveAttribute('aria-expanded', 'false');
