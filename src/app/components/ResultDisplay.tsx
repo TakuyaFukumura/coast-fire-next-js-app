@@ -4,8 +4,8 @@ import {CoastFireResult} from '@/types/coastFire';
 import {formatAmount, formatPercentage} from '../../../lib/coastFireCalculations';
 
 interface ResultDisplayProps {
-    result: CoastFireResult;
-    targetAmount: number;
+    readonly result: CoastFireResult;
+    readonly targetAmount: number;
 }
 
 export default function ResultDisplay({result, targetAmount}: ResultDisplayProps) {
