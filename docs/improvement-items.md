@@ -24,7 +24,7 @@
 
 1. **型安全性**: TypeScript を strict モードで使用しており、型安全性が高い
 2. **コード品質**: ESLint による静的解析が導入されており、現時点でリントエラーなし
-3. **テスト体制**: Jest によるテストが実装されており、計算ロジックは100%カバレッジ
+3. **テスト体制**: Jest によるテストが実装されており、計算ロジック（`lib/coastFireCalculations.ts`）のテストカバレッジは約 87%（実測値: Statement 87.23%, Function 100%）
 4. **CI/CD**: GitHub Actions による自動テストとビルド検証が設定済み
 5. **依存関係管理**: Dependabot による自動更新が月次で設定されている
 6. **ドキュメント**: README.md、CHANGELOG.md が適切に整備されている
@@ -43,18 +43,19 @@
 **優先度**: 高
 
 **現状**:
-- `js-yaml < 3.14.2` に moderate severity の prototype pollution 脆弱性が存在
-- `npm audit` 実行結果: 1 moderate severity vulnerability
+- 調査時点（2026-02-15）では `js-yaml < 3.14.2` に moderate severity の prototype pollution 脆弱性が存在していた
+- 本 PR にて `js-yaml@3.14.2` へ更新済みであり、当該脆弱性は解消済み（`package-lock.json` の変更を参照）
+- 現在の `npm audit` 実行結果: 0 vulnerabilities
 
 **影響範囲**:
 - `@istanbuljs/load-nyc-config/node_modules/js-yaml` (テスト関連の依存関係)
 - 開発環境のみで使用されており、本番環境への直接的な影響は限定的
 
-**推奨対応**:
-```bash
-npm audit fix
-```
-を実行して脆弱性を解消する
+**対応状況**:
+- 本 PR で `npm audit fix` を実行し、`js-yaml` の脆弱性は既に解消済み
+
+**今後の推奨対応**:
+- 依存関係を更新したタイミングで `npm audit` を定期的に実行し、新たな脆弱性の有無を確認する
 
 #### 1.2 環境変数の管理
 
@@ -76,7 +77,7 @@ npm audit fix
 
 **現状**:
 - 全体のコードカバレッジ: 42.66% (Statement)
-- ビジネスロジック (`lib/coastFireCalculations.ts`): 87.23%
+- ビジネスロジック (`lib/coastFireCalculations.ts`): 87.23% (Statement), 100% (Function)
 - コンポーネント (`src/app/components`): 32.73%
   - `AssetChart.tsx`: 0%
   - `AssetTable.tsx`: 0%
