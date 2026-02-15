@@ -53,7 +53,7 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                         setTargetAmount(isNaN(value) ? 0 : value);
                     }}
                     min={100}
-                    max={100000}
+                    max={10000}
                     step={100}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200"
                     required
@@ -63,12 +63,12 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                     value={isNaN(targetAmount) ? 2000 : targetAmount}
                     onChange={(e) => setTargetAmount(Number(e.target.value))}
                     min={100}
-                    max={100000}
+                    max={10000}
                     step={100}
                     className="w-full"
                     aria-label="目標資産額（万円）"
                 />
-                <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 100万円〜10億円</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 100万円〜1億円</p>
             </div>
 
             {/* 現在の年齢 */}
@@ -105,7 +105,7 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                         const value = e.target.valueAsNumber;
                         setTargetAge(isNaN(value) ? 0 : value);
                     }}
-                    min={30}
+                    min={1}
                     max={100}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200"
                     required
@@ -114,12 +114,12 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                     type="range"
                     value={isNaN(targetAge) ? 65 : targetAge}
                     onChange={(e) => setTargetAge(Number(e.target.value))}
-                    min={30}
+                    min={1}
                     max={100}
                     className="w-full"
                     aria-label="目標達成年齢"
                 />
-                <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 30歳〜100歳</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 1歳〜100歳</p>
             </div>
 
             {/* 運用利回り */}
@@ -136,7 +136,7 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                         setReturnRate(isNaN(value) ? 0 : value);
                     }}
                     min={0}
-                    max={20}
+                    max={10}
                     step={0.1}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200"
                     required
@@ -146,12 +146,12 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                     value={isNaN(returnRate) ? 5 : returnRate}
                     onChange={(e) => setReturnRate(Number(e.target.value))}
                     min={0}
-                    max={20}
+                    max={10}
                     step={0.1}
                     className="w-full"
                     aria-label="運用利回り（%）"
                 />
-                <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 0%〜20%</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 0%〜10%</p>
             </div>
 
             {/* インフレ率 */}
@@ -168,7 +168,7 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                         setInflationRate(isNaN(value) ? 0 : value);
                     }}
                     min={0}
-                    max={10}
+                    max={5}
                     step={0.1}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200"
                     required
@@ -178,12 +178,12 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                     value={isNaN(inflationRate) ? 2 : inflationRate}
                     onChange={(e) => setInflationRate(Number(e.target.value))}
                     min={0}
-                    max={10}
+                    max={5}
                     step={0.1}
                     className="w-full"
                     aria-label="インフレ率（%）"
                 />
-                <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 0%〜10%</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 0%〜5%</p>
             </div>
 
             {/* ボタン */}
