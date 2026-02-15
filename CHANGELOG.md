@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-02-15
+
 ### 削除
 
 - ホーム画面を削除し、ルートパスから Coast FIRE 計算機ページへのリダイレクトを実装
@@ -46,7 +48,9 @@
 
 - 雛形アプリの初期設定
 
-[unreleased]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.2.0...HEAD
+[unreleased]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.3.0...HEAD
+
+[0.2.0]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.2.0...v0.3.0
 
 [0.2.0]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.1.0...v0.2.0
 
