@@ -37,7 +37,6 @@ export default function Header() {
     const isActive = (path: string) => pathname === path;
 
     const navLinks = [
-        {href: '/', label: 'ホーム'},
         {href: '/coast-fire', label: 'Coast FIRE 計算機'},
     ];
 
@@ -48,7 +47,7 @@ export default function Header() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     <div className="flex items-center gap-8">
-                        <Link href="/"
+                        <Link href="/coast-fire"
                               className="text-xl font-semibold text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                             coast-fire-next-js-app
                         </Link>

@@ -213,15 +213,25 @@ describe('Header', () => {
         it('ナビゲーションリンクが表示される', () => {
             renderWithProvider();
 
-            expect(screen.getByRole('link', {name: 'ホーム'})).toBeInTheDocument();
             expect(screen.getByRole('link', {name: 'Coast FIRE 計算機'})).toBeInTheDocument();
         });
 
-        it('アクティブなリンクにaria-current="page"が設定される', () => {
+        it('ホームページ（/）ではaria-current属性が設定されない', () => {
             renderWithProvider();
 
-            const homeLink = screen.getByRole('link', {name: 'ホーム'});
-            expect(homeLink).toHaveAttribute('aria-current', 'page');
+            const coastFireLink = screen.getAllByRole('link', {name: 'Coast FIRE 計算機'})[0];
+            expect(coastFireLink).not.toHaveAttribute('aria-current');
+        });
+
+        it('Coast FIREページ（/coast-fire）ではaria-current="page"が設定される', () => {
+            // usePathname を /coast-fire に変更
+            const nextNavigation = jest.requireMock('next/navigation');
+            nextNavigation.usePathname.mockReturnValue('/coast-fire');
+
+            renderWithProvider();
+
+            const coastFireLink = screen.getAllByRole('link', {name: 'Coast FIRE 計算機'})[0];
+            expect(coastFireLink).toHaveAttribute('aria-current', 'page');
         });
 
         it('モバイルメニューボタンが表示される', () => {
@@ -258,7 +268,7 @@ describe('Header', () => {
             fireEvent.click(menuButton);
 
             // メニュー内のリンクをクリック
-            const links = screen.getAllByRole('link', {name: 'ホーム'});
+            const links = screen.getAllByRole('link', {name: 'Coast FIRE 計算機'});
             const mobileLink = links.find(link => link.closest('#mobile-menu'));
             if (mobileLink) {
                 fireEvent.click(mobileLink);
