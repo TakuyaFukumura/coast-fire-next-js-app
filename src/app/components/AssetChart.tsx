@@ -6,7 +6,7 @@ import {formatAmount} from '../../../lib/coastFireCalculations';
 import {useCallback} from 'react';
 
 interface AssetChartProps {
-    yearlyData: YearlyData[];
+    readonly yearlyData: YearlyData[];
 }
 
 export default function AssetChart({yearlyData}: AssetChartProps) {
