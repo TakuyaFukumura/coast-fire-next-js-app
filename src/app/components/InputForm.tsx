@@ -168,7 +168,7 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                         setInflationRate(isNaN(value) ? 0 : value);
                     }}
                     min={0}
-                    max={10}
+                    max={5}
                     step={0.1}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200"
                     required
@@ -178,12 +178,12 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                     value={isNaN(inflationRate) ? 2 : inflationRate}
                     onChange={(e) => setInflationRate(Number(e.target.value))}
                     min={0}
-                    max={10}
+                    max={5}
                     step={0.1}
                     className="w-full"
                     aria-label="インフレ率（%）"
                 />
-                <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 0%〜10%</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 0%〜5%</p>
             </div>
 
             {/* ボタン */}
