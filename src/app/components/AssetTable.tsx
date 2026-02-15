@@ -5,10 +5,10 @@ import {formatAmount} from '../../../lib/coastFireCalculations';
 import {useState} from 'react';
 
 interface AssetTableProps {
-    yearlyData: YearlyData[];
+    readonly yearlyData: ReadonlyArray<YearlyData>;
 }
 
-export default function AssetTable({yearlyData}: AssetTableProps) {
+export default function AssetTable({yearlyData}: Readonly<AssetTableProps>) {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortField, setSortField] = useState<keyof YearlyData>('age');
     const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
