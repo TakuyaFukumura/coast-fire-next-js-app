@@ -225,8 +225,8 @@ describe('Header', () => {
 
         it('Coast FIREページ（/coast-fire）ではaria-current="page"が設定される', () => {
             // usePathname を /coast-fire に変更
-            const {usePathname} = require('next/navigation');
-            usePathname.mockReturnValue('/coast-fire');
+            const nextNavigation = jest.requireMock('next/navigation');
+            nextNavigation.usePathname.mockReturnValue('/coast-fire');
 
             renderWithProvider();
 

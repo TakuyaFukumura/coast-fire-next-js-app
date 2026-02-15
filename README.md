@@ -128,7 +128,7 @@ pnpm start
 └── tsconfig.json
 ```
 
-## 機能
+## 開発
 
 ### テスト
 
