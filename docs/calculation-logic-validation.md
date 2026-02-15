@@ -203,21 +203,21 @@ for (let age = currentAge; age <= targetAge; age++) {
 実質利回り = 1.05 / 1.02 - 1 = 0.0294117... ≈ 2.94%
 
 現在必要な資産額 = 2000 / (1.0294117)^37
-                = 2000 / 2.896...
-                ≈ 690万円
+                = 2000 / 2.923...
+                ≈ 684万円
 
-目標年齢での名目額 = 690 × (1.05)^37
-                  = 690 × 5.792...
-                  ≈ 4,000万円
+目標年齢での名目額 = 684 × (1.05)^37
+                  = 684 × 6.081...
+                  ≈ 4,161万円
 
-目標年齢での実質価値 = 4,000 / (1.02)^37
-                    = 4,000 / 2.0
-                    = 2,000万円 ✅
+目標年齢での実質価値 = 4,161 / (1.02)^37
+                    = 4,161 / 2.081
+                    ≈ 2,000万円 ✅
 ```
 
 **実装の結果との比較:**
 - テストコードでは `requiredAmount` が600〜800万円の範囲内と検証
-- 手計算の約690万円は範囲内 ✅
+- 手計算の約684万円は範囲内 ✅
 - 最終的な実質価値が目標額2000万円と一致することも検証済み ✅
 
 ### 検証2: 極端なケース（運用利回り = インフレ率）
@@ -228,10 +228,14 @@ for (let age = currentAge; age <= targetAge; age++) {
 
 **実装の検証（テストコードより）:**
 ```typescript
-returnRate: 0.03
-inflationRate: 0.03
-実質利回り: 0（実測値: 0に非常に近い）
-requiredAmount: 2000に近い ✅
+const input = {
+    returnRate: 0.03,
+    inflationRate: 0.03,
+    // ... その他のパラメータ
+};
+const result = calculateCoastFire(input);
+// 実質利回りが0に非常に近い
+// requiredAmountが目標額2000に近い ✅
 ```
 
 ### 検証3: インフレ率0のケース
@@ -241,8 +245,12 @@ requiredAmount: 2000に近い ✅
 
 **実装の検証（テストコードより）:**
 ```typescript
-inflationRate: 0
-→ 全ての年齢で amount ≈ inflationAdjusted ✅
+const input = {
+    inflationRate: 0,
+    // ... その他のパラメータ
+};
+const result = calculateCoastFire(input);
+// 全ての年齢で amount ≈ inflationAdjusted ✅
 ```
 
 ## 実装の正確性評価
