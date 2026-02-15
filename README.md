@@ -43,6 +43,8 @@ Next.jsを使ったシンプルなアプリケーションです。
 
 ### 開発サーバーの起動
 
+開発サーバーは[Turbopack](https://nextjs.org/docs/architecture/turbopack)を使用して高速に起動します。
+
 ```bash
 npm run dev
 ```
@@ -113,15 +115,28 @@ pnpm start
 ├── lib/
 │   └── coastFireCalculations.ts  # Coast FIRE計算ロジック
 ├── src/
-│   └── app/
-│       ├── coast-fire/
-│       │   └── page.tsx  # Coast FIRE計算機ページ
-│       ├── components/      # Reactコンポーネント
-│       │   ├── DarkModeProvider.tsx  # ダークモードProvider
-│       │   └── Header.tsx   # ヘッダーコンポーネント
-│       ├── globals.css      # グローバルスタイル
-│       ├── layout.tsx       # アプリケーションレイアウト
-│       └── page.tsx         # ホームページ（Coast FIREへリダイレクト）
+│   ├── app/
+│   │   ├── coast-fire/
+│   │   │   └── page.tsx           # Coast FIRE計算機ページ
+│   │   ├── components/            # Reactコンポーネント
+│   │   │   ├── AssetChart.tsx     # 資産推移グラフコンポーネント
+│   │   │   ├── AssetTable.tsx     # 資産データテーブルコンポーネント
+│   │   │   ├── CoastFireCalculator.tsx  # Coast FIRE計算機メインコンポーネント
+│   │   │   ├── DarkModeProvider.tsx     # ダークモードProvider
+│   │   │   ├── Header.tsx         # ヘッダーコンポーネント
+│   │   │   ├── InputForm.tsx      # 入力フォームコンポーネント
+│   │   │   └── ResultDisplay.tsx  # 結果表示コンポーネント
+│   │   ├── globals.css            # グローバルスタイル
+│   │   ├── layout.tsx             # アプリケーションレイアウト
+│   │   └── page.tsx               # ホームページ（Coast FIREへリダイレクト）
+│   └── types/
+│       └── coastFire.ts           # Coast FIRE型定義
+├── __tests__/                     # テストファイル
+│   ├── lib/
+│   │   └── coastFireCalculations.test.ts
+│   └── src/app/components/
+│       ├── DarkModeProvider.test.tsx
+│       └── Header.test.tsx
 ├── package.json
 ├── next.config.ts
 ├── tailwind.config.ts
