@@ -19,7 +19,14 @@ export default function AssetTable({yearlyData}: AssetTableProps) {
         const aValue = a[sortField];
         const bValue = b[sortField];
         const multiplier = sortDirection === 'asc' ? 1 : -1;
-        return aValue < bValue ? -1 * multiplier : aValue > bValue ? 1 * multiplier : 0;
+
+        if (aValue < bValue) {
+            return -1 * multiplier;
+        }
+        if (aValue > bValue) {
+            return 1 * multiplier;
+        }
+        return 0;
     });
 
     // ページネーション処理
