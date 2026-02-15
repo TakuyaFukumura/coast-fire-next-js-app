@@ -24,11 +24,23 @@
 
 #### 確認方法
 
+リポジトリ全体を対象に、すべてのファイルタイプで包括的な検索を実施しました：
+
 ```bash
-grep -r "file.svg\|globe.svg\|next.svg\|vercel.svg\|window.svg" src/ --include="*.tsx" --include="*.ts"
+# リポジトリ全体を検索（node_modules, .git, .next, coverage を除外）
+grep -r "file\.svg\|globe\.svg\|next\.svg\|vercel\.svg\|window\.svg" . \
+  --exclude-dir={node_modules,.git,.next,coverage}
 ```
 
-上記コマンドの実行結果、該当ファイルへの参照は一切見つかりませんでした。
+検索対象に含まれるファイルタイプ：
+- TypeScript/JavaScript ファイル（`.ts`, `.tsx`, `.js`, `.jsx`）
+- スタイルシート（`.css`, `.scss`, `.sass`）
+- マークダウン（`.md`）
+- HTML ファイル（`.html`）
+- 設定ファイル（`.json`, `.yaml`, `.yml`, `.mjs`, `.cjs`）
+- その他すべてのテキストファイル
+
+上記コマンドの実行結果、該当ファイルへの参照は本ドキュメント自身を除いて一切見つかりませんでした。
 
 #### 削除の影響
 
