@@ -53,7 +53,7 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                         setTargetAmount(isNaN(value) ? 0 : value);
                     }}
                     min={100}
-                    max={100000}
+                    max={10000}
                     step={100}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200"
                     required
@@ -63,12 +63,12 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                     value={isNaN(targetAmount) ? 2000 : targetAmount}
                     onChange={(e) => setTargetAmount(Number(e.target.value))}
                     min={100}
-                    max={100000}
+                    max={10000}
                     step={100}
                     className="w-full"
                     aria-label="目標資産額（万円）"
                 />
-                <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 100万円〜10億円</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">範囲: 100万円〜1億円</p>
             </div>
 
             {/* 現在の年齢 */}
