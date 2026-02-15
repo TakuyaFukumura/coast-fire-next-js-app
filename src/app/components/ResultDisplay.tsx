@@ -13,7 +13,7 @@ export default function ResultDisplay({result, targetAmount}: ResultDisplayProps
 
     return (
         <div
-            className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-700 p-8 rounded-xl shadow-lg">
+            className="bg-linear-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-700 p-8 rounded-xl shadow-lg">
             <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6 text-center">計算結果</h2>
 
             {/* 現在必要な資産額 */}
