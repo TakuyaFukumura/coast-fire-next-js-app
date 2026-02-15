@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-02-16
+
 ### 変更
 
 - README.mdの更新
@@ -15,6 +17,7 @@
 - メタデータの更新
   - アプリケーションタイトルを「基本Next.jsアプリ」から「Coast FIRE計算機」に変更
   - アプリケーション説明を現在の機能（Coast FIRE計算機）に合わせて更新
+- 入力パラメータの範囲設定
 
 ### 削除
 
@@ -67,7 +70,9 @@
 
 - 雛形アプリの初期設定
 
-[unreleased]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.4.0...HEAD
+
+[0.3.0]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.3.0...v0.4.0
 
 [0.2.0]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.2.0...v0.3.0
 
