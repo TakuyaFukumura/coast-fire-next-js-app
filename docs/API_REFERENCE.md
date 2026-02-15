@@ -37,7 +37,7 @@ function calculateCoastFire(input: CoastFireInput): CoastFireResult
 #### 使用例
 
 ```typescript
-import { calculateCoastFire } from '@/lib/coastFireCalculations';
+import { calculateCoastFire } from '../../../lib/coastFireCalculations';
 
 const input: CoastFireInput = {
   targetAmount: 2000,      // 2000万円
@@ -111,7 +111,7 @@ function formatAmount(amount: number): string
 #### 使用例
 
 ```typescript
-import { formatAmount } from '@/lib/coastFireCalculations';
+import { formatAmount } from '../../../lib/coastFireCalculations';
 
 console.log(formatAmount(1234));      // "1,234万円"
 console.log(formatAmount(10000));     // "10,000万円"
@@ -144,7 +144,7 @@ function formatPercentage(rate: number, decimalPlaces?: number): string
 #### 使用例
 
 ```typescript
-import { formatPercentage } from '@/lib/coastFireCalculations';
+import { formatPercentage } from '../../../lib/coastFireCalculations';
 
 console.log(formatPercentage(0.05));        // "5.00%"
 console.log(formatPercentage(0.123, 3));    // "12.300%"
@@ -325,8 +325,8 @@ interface InputFormProps {
   /** 計算実行時のコールバック */
   onCalculate: (input: CoastFireInput) => void;
   
-  /** 初期値 */
-  defaultValues: CoastFireInput;
+  /** 初期値（省略可能、デフォルトは DEFAULT_INPUT） */
+  defaultValues?: CoastFireInput;
 }
 ```
 
@@ -352,8 +352,8 @@ function MyComponent() {
 #### 機能
 
 - スライダーと数値入力の両方をサポート
-- リアルタイムでの計算実行
-- 入力値のバリデーション
+- フォーム送信（再計算ボタン）またはリセット時に計算を実行
+- HTML の `min`、`max`、`required` 属性による基本的な入力制約
 
 ---
 
@@ -506,7 +506,7 @@ interface DarkModeProviderProps {
 #### 使用例
 
 ```typescript
-import DarkModeProvider from '@/app/components/DarkModeProvider';
+import { DarkModeProvider } from '@/app/components/DarkModeProvider';
 
 function MyApp({ children }) {
   return (
@@ -520,12 +520,17 @@ function MyApp({ children }) {
 #### 提供する値
 
 ```typescript
+type Theme = 'light' | 'dark';
+
 interface DarkModeContextType {
-  /** ダークモードが有効かどうか */
-  isDarkMode: boolean;
+  /** 現在のテーマ */
+  theme: Theme;
   
-  /** ダークモードの切り替え */
-  toggleDarkMode: () => void;
+  /** テーマの設定 */
+  setTheme: (theme: Theme) => void;
+  
+  /** ダークモードが有効かどうか */
+  isDark: boolean;
 }
 ```
 
@@ -555,9 +560,12 @@ interface DarkModeContextType {
 ```typescript
 import { createContext } from 'react';
 
+type Theme = 'light' | 'dark';
+
 interface DarkModeContextType {
-  isDarkMode: boolean;
-  toggleDarkMode: () => void;
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+  isDark: boolean;
 }
 
 const DarkModeContext = createContext<DarkModeContextType | undefined>(undefined);
@@ -569,11 +577,11 @@ const DarkModeContext = createContext<DarkModeContextType | undefined>(undefined
 import { useDarkMode } from '@/app/components/DarkModeProvider';
 
 function MyComponent() {
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { theme, setTheme, isDark } = useDarkMode();
   
   return (
-    <button onClick={toggleDarkMode}>
-      {isDarkMode ? 'ライトモード' : 'ダークモード'}
+    <button onClick={() => setTheme(isDark ? 'light' : 'dark')}>
+      {isDark ? 'ライトモード' : 'ダークモード'}
     </button>
   );
 }
@@ -584,7 +592,7 @@ function MyComponent() {
 `DarkModeProvider` の外で `useDarkMode()` を使用すると、以下のエラーがスローされます：
 
 ```
-Error: useDarkMode must be used within DarkModeProvider
+Error: useDarkMode must be used within a DarkModeProvider
 ```
 
 ---
@@ -626,34 +634,45 @@ try {
 
 ## 型のインポート
 
-### エクスポート一覧
+### インポート方法
+
+#### 計算ロジック
+
+コンポーネントからの相対パスでインポートします：
 
 ```typescript
-// 計算ロジック
-export { calculateCoastFire, formatAmount, formatPercentage } from '@/lib/coastFireCalculations';
+// src/app/components/ からの場合
+import { calculateCoastFire, formatAmount, formatPercentage } from '../../../lib/coastFireCalculations';
+```
 
-// 型定義
-export type { 
-  CoastFireInput, 
-  CoastFireResult, 
-  YearlyData 
-} from '@/types/coastFire';
+#### 型定義
 
-// デフォルト値
-export { DEFAULT_INPUT } from '@/types/coastFire';
+`@/types/coastFire` のパスエイリアスが使用可能です：
 
-// Context
-export { useDarkMode } from '@/app/components/DarkModeProvider';
+```typescript
+import type { CoastFireInput, CoastFireResult, YearlyData } from '@/types/coastFire';
+import { DEFAULT_INPUT } from '@/types/coastFire';
+```
+
+#### Context
+
+`@/app/components/DarkModeProvider` のパスエイリアスが使用可能です：
+
+```typescript
+import { useDarkMode } from '@/app/components/DarkModeProvider';
 ```
 
 ### 使用例
 
 ```typescript
-import { calculateCoastFire, formatAmount } from '@/lib/coastFireCalculations';
+// コンポーネント内での実際の使用例
+import { calculateCoastFire, formatAmount } from '../../../lib/coastFireCalculations';
 import type { CoastFireInput, CoastFireResult } from '@/types/coastFire';
 import { DEFAULT_INPUT } from '@/types/coastFire';
 import { useDarkMode } from '@/app/components/DarkModeProvider';
 ```
+
+**注意**: `lib/` ディレクトリは `src/` の外にあるため、`@/` エイリアスではアクセスできません。相対パスを使用してください。
 
 ---
 

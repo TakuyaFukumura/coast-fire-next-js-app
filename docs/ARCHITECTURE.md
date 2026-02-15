@@ -324,13 +324,20 @@ const [result, setResult] = useState<CoastFireResult | null>(null);
 Context API を使用してアプリケーション全体で共有する状態を管理します。
 
 ```typescript
-// DarkModeProvider
+type Theme = 'light' | 'dark';
+
+type DarkModeContextType = {
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+  isDark: boolean;
+};
+
 const DarkModeContext = createContext<DarkModeContextType | undefined>(undefined);
 
 export function useDarkMode() {
   const context = useContext(DarkModeContext);
   if (!context) {
-    throw new Error('useDarkMode must be used within DarkModeProvider');
+    throw new Error('useDarkMode must be used within a DarkModeProvider');
   }
   return context;
 }
@@ -346,17 +353,18 @@ export function useDarkMode() {
 `localStorage` を使用してブラウザに状態を保存します。
 
 ```typescript
-// ダークモード設定の永続化
+// テーマ設定の永続化
 useEffect(() => {
-  const saved = localStorage.getItem('darkMode');
-  if (saved !== null) {
-    setIsDarkMode(saved === 'true');
+  const savedTheme = localStorage.getItem('theme') as Theme;
+  if (savedTheme && ['light', 'dark'].includes(savedTheme)) {
+    setTheme(savedTheme);
   }
 }, []);
 
-useEffect(() => {
-  localStorage.setItem('darkMode', String(isDarkMode));
-}, [isDarkMode]);
+const handleSetTheme = (newTheme: Theme) => {
+  setTheme(newTheme);
+  localStorage.setItem('theme', newTheme);
+};
 ```
 
 ## ルーティング
