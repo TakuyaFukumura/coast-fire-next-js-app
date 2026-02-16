@@ -1,7 +1,7 @@
 'use client';
 
 import {CoastFireInput, DEFAULT_INPUT} from '@/types/coastFire';
-import {useState} from 'react';
+import React, {useState} from 'react';
 
 interface InputFormProps {
     readonly onCalculate: (input: CoastFireInput) => void;
