@@ -4,8 +4,8 @@ import {CoastFireInput, DEFAULT_INPUT} from '@/types/coastFire';
 import {useState} from 'react';
 
 interface InputFormProps {
-    onCalculate: (input: CoastFireInput) => void;
-    defaultValues?: CoastFireInput;
+    readonly onCalculate: (input: CoastFireInput) => void;
+    readonly defaultValues?: CoastFireInput;
 }
 
 export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: InputFormProps) {
