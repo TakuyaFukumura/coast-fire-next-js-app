@@ -2,7 +2,7 @@
 
 import {YearlyData} from '@/types/coastFire';
 import {formatAmount} from '../../../lib/coastFireCalculations';
-import {useState} from 'react';
+import React, {useState} from 'react';
 
 interface AssetTableProps {
     readonly yearlyData: ReadonlyArray<YearlyData>;
