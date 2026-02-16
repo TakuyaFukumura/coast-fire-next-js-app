@@ -4,6 +4,20 @@ import {YearlyData} from '@/types/coastFire';
 import {formatAmount} from '../../../lib/coastFireCalculations';
 import React, {useState} from 'react';
 
+// SortIconを外部定義
+interface SortIconProps {
+    field: keyof YearlyData;
+    sortField: keyof YearlyData;
+    sortDirection: 'asc' | 'desc';
+}
+
+const SortIcon: React.FC<SortIconProps> = ({ field, sortField, sortDirection }) => {
+    if (sortField !== field) {
+        return <span className="text-gray-400">⇅</span>;
+    }
+    return <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>;
+};
+
 interface AssetTableProps {
     readonly yearlyData: ReadonlyArray<YearlyData>;
 }
@@ -54,14 +68,6 @@ export default function AssetTable({yearlyData}: Readonly<AssetTableProps>) {
         }
     };
 
-    // ソートアイコン
-    const SortIcon = ({field}: { field: keyof YearlyData }) => {
-        if (sortField !== field) {
-            return <span className="text-gray-400">⇅</span>;
-        }
-        return <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>;
-    };
-
     // aria-sort用の関数を追加
     const getAriaSort = (field: keyof YearlyData) => {
         if (sortField === field) {
@@ -86,7 +92,7 @@ export default function AssetTable({yearlyData}: Readonly<AssetTableProps>) {
                             tabIndex={0}
                             aria-sort={getAriaSort('age')}
                         >
-                            年齢 <SortIcon field="age"/>
+                            年齢 <SortIcon field="age" sortField={sortField} sortDirection={sortDirection} />
                         </th>
                         <th
                             onClick={() => handleSort('amount')}
@@ -95,7 +101,7 @@ export default function AssetTable({yearlyData}: Readonly<AssetTableProps>) {
                             tabIndex={0}
                             aria-sort={getAriaSort('amount')}
                         >
-                            資産額（名目） <SortIcon field="amount"/>
+                            資産額（名目） <SortIcon field="amount" sortField={sortField} sortDirection={sortDirection} />
                         </th>
                         <th
                             onClick={() => handleSort('inflationAdjusted')}
@@ -104,7 +110,7 @@ export default function AssetTable({yearlyData}: Readonly<AssetTableProps>) {
                             tabIndex={0}
                             aria-sort={getAriaSort('inflationAdjusted')}
                         >
-                            インフレ調整後価値（実質） <SortIcon field="inflationAdjusted"/>
+                            インフレ調整後価値（実質） <SortIcon field="inflationAdjusted" sortField={sortField} sortDirection={sortDirection} />
                         </th>
                         <th
                             onClick={() => handleSort('realReturn')}
@@ -113,7 +119,7 @@ export default function AssetTable({yearlyData}: Readonly<AssetTableProps>) {
                             tabIndex={0}
                             aria-sort={getAriaSort('realReturn')}
                         >
-                            実質利回り累計 <SortIcon field="realReturn"/>
+                            実質利回り累計 <SortIcon field="realReturn" sortField={sortField} sortDirection={sortDirection} />
                         </th>
                     </tr>
                     </thead>
