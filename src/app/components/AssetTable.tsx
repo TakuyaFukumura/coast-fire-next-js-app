@@ -62,6 +62,14 @@ export default function AssetTable({yearlyData}: Readonly<AssetTableProps>) {
         return <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>;
     };
 
+    // aria-sort用の関数を追加
+    const getAriaSort = (field: keyof YearlyData) => {
+        if (sortField === field) {
+            return sortDirection === 'asc' ? 'ascending' : 'descending';
+        }
+        return 'none';
+    };
+
     return (
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">詳細データテーブル</h2>
@@ -76,7 +84,7 @@ export default function AssetTable({yearlyData}: Readonly<AssetTableProps>) {
                             onKeyDown={(e) => handleKeyDown(e, 'age')}
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
                             tabIndex={0}
-                            aria-sort={sortField === 'age' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'}
+                            aria-sort={getAriaSort('age')}
                         >
                             年齢 <SortIcon field="age"/>
                         </th>
@@ -85,7 +93,7 @@ export default function AssetTable({yearlyData}: Readonly<AssetTableProps>) {
                             onKeyDown={(e) => handleKeyDown(e, 'amount')}
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
                             tabIndex={0}
-                            aria-sort={sortField === 'amount' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'}
+                            aria-sort={getAriaSort('amount')}
                         >
                             資産額（名目） <SortIcon field="amount"/>
                         </th>
@@ -94,7 +102,7 @@ export default function AssetTable({yearlyData}: Readonly<AssetTableProps>) {
                             onKeyDown={(e) => handleKeyDown(e, 'inflationAdjusted')}
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
                             tabIndex={0}
-                            aria-sort={sortField === 'inflationAdjusted' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'}
+                            aria-sort={getAriaSort('inflationAdjusted')}
                         >
                             インフレ調整後価値（実質） <SortIcon field="inflationAdjusted"/>
                         </th>
@@ -103,7 +111,7 @@ export default function AssetTable({yearlyData}: Readonly<AssetTableProps>) {
                             onKeyDown={(e) => handleKeyDown(e, 'realReturn')}
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
                             tabIndex={0}
-                            aria-sort={sortField === 'realReturn' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'}
+                            aria-sort={getAriaSort('realReturn')}
                         >
                             実質利回り累計 <SortIcon field="realReturn"/>
                         </th>
