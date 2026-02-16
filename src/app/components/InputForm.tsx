@@ -15,7 +15,7 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
     const [returnRate, setReturnRate] = useState(defaultValues.returnRate * 100); // パーセント表示
     const [inflationRate, setInflationRate] = useState(defaultValues.inflationRate * 100); // パーセント表示
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         onCalculate({
             targetAmount,
