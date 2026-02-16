@@ -7,6 +7,30 @@
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-02-16
+
+### 変更
+
+- 導線整理: ルートパス (`/`) でCoast FIRE計算機を直接表示するように変更
+    - `src/app/page.tsx` をリダイレクトからCoast FIRE計算機の直接表示に変更
+    - `/coast-fire` ディレクトリを削除
+    - `/coast-fire` から `/` への永続的なリダイレクト（301）を `next.config.ts` に追加
+- ヘッダーコンポーネントの簡素化
+    - ナビゲーションメニューを削除（アプリケーションは単一ページのため不要）
+    - モバイルメニュー関連のコードを削除
+    - アプリケーション名とダークモード切り替えボタンのみを保持
+- README.md の更新
+    - プロジェクト構造を最新の実装に合わせて更新
+    - リダイレクトに関する記述を削除
+- テストの更新
+    - `Header.test.tsx` からナビゲーション関連のテストを削除
+    - 簡素化されたヘッダーの機能に合わせてテストを更新
+
+### 削除
+
+- `src/app/coast-fire/` ディレクトリ全体
+- 実装後不要になった設計ドキュメント（`docs/navigation-improvement-design.md`）
+
 ## [0.4.0] - 2026-02-16
 
 ### 変更
@@ -70,9 +94,11 @@
 
 - 雛形アプリの初期設定
 
-[unreleased]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.4.0...HEAD
+[unreleased]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.5.0...HEAD
 
-[0.3.0]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.3.0...v0.4.0
+[0.5.0]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.4.0...v0.5.0
+
+[0.4.0]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.3.0...v0.4.0
 
 [0.2.0]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.2.0...v0.3.0
 

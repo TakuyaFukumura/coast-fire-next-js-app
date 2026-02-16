@@ -76,7 +76,7 @@ pnpm dev
 - ダークモード対応
 
 ブラウザで [http://localhost:3000](http://localhost:3000) を開いて
-アプリケーションを確認してください。自動的にCoast FIRE計算機ページにリダイレクトされます。
+アプリケーションを確認してください。
 
 ### ビルドと本番デプロイ
 
@@ -117,8 +117,6 @@ pnpm start
 │   └── coastFireCalculations.ts  # Coast FIRE計算ロジック
 ├── src/
 │   ├── app/
-│   │   ├── coast-fire/
-│   │   │   └── page.tsx           # Coast FIRE計算機ページ
 │   │   ├── components/            # Reactコンポーネント
 │   │   │   ├── AssetChart.tsx     # 資産推移グラフコンポーネント
 │   │   │   ├── AssetTable.tsx     # 資産データテーブルコンポーネント
@@ -129,7 +127,7 @@ pnpm start
 │   │   │   └── ResultDisplay.tsx  # 結果表示コンポーネント
 │   │   ├── globals.css            # グローバルスタイル
 │   │   ├── layout.tsx             # アプリケーションレイアウト
-│   │   └── page.tsx               # ホームページ（Coast FIREへリダイレクト）
+│   │   └── page.tsx               # ホームページ（Coast FIRE計算機）
 │   └── types/
 │       └── coastFire.ts           # Coast FIRE型定義
 ├── __tests__/                     # テストファイル
