@@ -2,13 +2,27 @@
 
 import {YearlyData} from '@/types/coastFire';
 import {formatAmount} from '../../../lib/coastFireCalculations';
-import {useState} from 'react';
+import React, {useState} from 'react';
 
-interface AssetTableProps {
-    yearlyData: YearlyData[];
+// SortIconを外部定義
+interface SortIconProps {
+    field: keyof YearlyData;
+    sortField: keyof YearlyData;
+    sortDirection: 'asc' | 'desc';
 }
 
-export default function AssetTable({yearlyData}: AssetTableProps) {
+const SortIcon: React.FC<SortIconProps> = ({ field, sortField, sortDirection }) => {
+    if (sortField !== field) {
+        return <span className="text-gray-400">⇅</span>;
+    }
+    return <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>;
+};
+
+interface AssetTableProps {
+    readonly yearlyData: ReadonlyArray<YearlyData>;
+}
+
+export default function AssetTable({yearlyData}: Readonly<AssetTableProps>) {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortField, setSortField] = useState<keyof YearlyData>('age');
     const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
@@ -19,7 +33,14 @@ export default function AssetTable({yearlyData}: AssetTableProps) {
         const aValue = a[sortField];
         const bValue = b[sortField];
         const multiplier = sortDirection === 'asc' ? 1 : -1;
-        return aValue < bValue ? -1 * multiplier : aValue > bValue ? 1 * multiplier : 0;
+
+        if (aValue < bValue) {
+            return -1 * multiplier;
+        }
+        if (aValue > bValue) {
+            return 1 * multiplier;
+        }
+        return 0;
     });
 
     // ページネーション処理
@@ -47,12 +68,12 @@ export default function AssetTable({yearlyData}: AssetTableProps) {
         }
     };
 
-    // ソートアイコン
-    const SortIcon = ({field}: { field: keyof YearlyData }) => {
-        if (sortField !== field) {
-            return <span className="text-gray-400">⇅</span>;
+    // aria-sort用の関数を追加
+    const getAriaSort = (field: keyof YearlyData) => {
+        if (sortField === field) {
+            return sortDirection === 'asc' ? 'ascending' : 'descending';
         }
-        return <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>;
+        return 'none';
     };
 
     return (
@@ -69,36 +90,36 @@ export default function AssetTable({yearlyData}: AssetTableProps) {
                             onKeyDown={(e) => handleKeyDown(e, 'age')}
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
                             tabIndex={0}
-                            aria-sort={sortField === 'age' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'}
+                            aria-sort={getAriaSort('age')}
                         >
-                            年齢 <SortIcon field="age"/>
+                            年齢 <SortIcon field="age" sortField={sortField} sortDirection={sortDirection} />
                         </th>
                         <th
                             onClick={() => handleSort('amount')}
                             onKeyDown={(e) => handleKeyDown(e, 'amount')}
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
                             tabIndex={0}
-                            aria-sort={sortField === 'amount' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'}
+                            aria-sort={getAriaSort('amount')}
                         >
-                            資産額（名目） <SortIcon field="amount"/>
+                            資産額（名目） <SortIcon field="amount" sortField={sortField} sortDirection={sortDirection} />
                         </th>
                         <th
                             onClick={() => handleSort('inflationAdjusted')}
                             onKeyDown={(e) => handleKeyDown(e, 'inflationAdjusted')}
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
                             tabIndex={0}
-                            aria-sort={sortField === 'inflationAdjusted' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'}
+                            aria-sort={getAriaSort('inflationAdjusted')}
                         >
-                            インフレ調整後価値（実質） <SortIcon field="inflationAdjusted"/>
+                            インフレ調整後価値（実質） <SortIcon field="inflationAdjusted" sortField={sortField} sortDirection={sortDirection} />
                         </th>
                         <th
                             onClick={() => handleSort('realReturn')}
                             onKeyDown={(e) => handleKeyDown(e, 'realReturn')}
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
                             tabIndex={0}
-                            aria-sort={sortField === 'realReturn' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'}
+                            aria-sort={getAriaSort('realReturn')}
                         >
-                            実質利回り累計 <SortIcon field="realReturn"/>
+                            実質利回り累計 <SortIcon field="realReturn" sortField={sortField} sortDirection={sortDirection} />
                         </th>
                     </tr>
                     </thead>

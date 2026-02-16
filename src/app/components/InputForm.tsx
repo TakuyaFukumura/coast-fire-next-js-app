@@ -1,11 +1,11 @@
 'use client';
 
 import {CoastFireInput, DEFAULT_INPUT} from '@/types/coastFire';
-import {useState} from 'react';
+import React, {useState} from 'react';
 
 interface InputFormProps {
-    onCalculate: (input: CoastFireInput) => void;
-    defaultValues?: CoastFireInput;
+    readonly onCalculate: (input: CoastFireInput) => void;
+    readonly defaultValues?: CoastFireInput;
 }
 
 export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: InputFormProps) {
@@ -15,7 +15,7 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
     const [returnRate, setReturnRate] = useState(defaultValues.returnRate * 100); // パーセント表示
     const [inflationRate, setInflationRate] = useState(defaultValues.inflationRate * 100); // パーセント表示
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         onCalculate({
             targetAmount,
@@ -47,10 +47,10 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                 <input
                     type="number"
                     id="targetAmount"
-                    value={isNaN(targetAmount) ? '' : targetAmount}
+                    value={Number.isNaN(targetAmount) ? '' : targetAmount}
                     onChange={(e) => {
                         const value = e.target.valueAsNumber;
-                        setTargetAmount(isNaN(value) ? 0 : value);
+                        setTargetAmount(Number.isNaN(value) ? 0 : value);
                     }}
                     min={100}
                     max={10000}
@@ -60,7 +60,7 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                 />
                 <input
                     type="range"
-                    value={isNaN(targetAmount) ? 2000 : targetAmount}
+                    value={Number.isNaN(targetAmount) ? 2000 : targetAmount}
                     onChange={(e) => setTargetAmount(Number(e.target.value))}
                     min={100}
                     max={10000}
@@ -79,10 +79,10 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                 <input
                     type="number"
                     id="currentAge"
-                    value={isNaN(currentAge) ? '' : currentAge}
+                    value={Number.isNaN(currentAge) ? '' : currentAge}
                     onChange={(e) => {
                         const value = e.target.valueAsNumber;
-                        setCurrentAge(isNaN(value) ? 0 : value);
+                        setCurrentAge(Number.isNaN(value) ? 0 : value);
                     }}
                     min={0}
                     max={99}
@@ -100,10 +100,10 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                 <input
                     type="number"
                     id="targetAge"
-                    value={isNaN(targetAge) ? '' : targetAge}
+                    value={Number.isNaN(targetAge) ? '' : targetAge}
                     onChange={(e) => {
                         const value = e.target.valueAsNumber;
-                        setTargetAge(isNaN(value) ? 0 : value);
+                        setTargetAge(Number.isNaN(value) ? 0 : value);
                     }}
                     min={1}
                     max={100}
@@ -112,7 +112,7 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                 />
                 <input
                     type="range"
-                    value={isNaN(targetAge) ? 65 : targetAge}
+                    value={Number.isNaN(targetAge) ? 65 : targetAge}
                     onChange={(e) => setTargetAge(Number(e.target.value))}
                     min={1}
                     max={100}
@@ -130,10 +130,10 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                 <input
                     type="number"
                     id="returnRate"
-                    value={isNaN(returnRate) ? '' : returnRate}
+                    value={Number.isNaN(returnRate) ? '' : returnRate}
                     onChange={(e) => {
                         const value = e.target.valueAsNumber;
-                        setReturnRate(isNaN(value) ? 0 : value);
+                        setReturnRate(Number.isNaN(value) ? 0 : value);
                     }}
                     min={0}
                     max={10}
@@ -143,7 +143,7 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                 />
                 <input
                     type="range"
-                    value={isNaN(returnRate) ? 5 : returnRate}
+                    value={Number.isNaN(returnRate) ? 5 : returnRate}
                     onChange={(e) => setReturnRate(Number(e.target.value))}
                     min={0}
                     max={10}
@@ -162,10 +162,10 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                 <input
                     type="number"
                     id="inflationRate"
-                    value={isNaN(inflationRate) ? '' : inflationRate}
+                    value={Number.isNaN(inflationRate) ? '' : inflationRate}
                     onChange={(e) => {
                         const value = e.target.valueAsNumber;
-                        setInflationRate(isNaN(value) ? 0 : value);
+                        setInflationRate(Number.isNaN(value) ? 0 : value);
                     }}
                     min={0}
                     max={5}
@@ -175,7 +175,7 @@ export default function InputForm({onCalculate, defaultValues = DEFAULT_INPUT}: 
                 />
                 <input
                     type="range"
-                    value={isNaN(inflationRate) ? 2 : inflationRate}
+                    value={Number.isNaN(inflationRate) ? 2 : inflationRate}
                     onChange={(e) => setInflationRate(Number(e.target.value))}
                     min={0}
                     max={5}

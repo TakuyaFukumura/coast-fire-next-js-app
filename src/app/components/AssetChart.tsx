@@ -6,7 +6,7 @@ import {formatAmount} from '../../../lib/coastFireCalculations';
 import {useCallback} from 'react';
 
 interface AssetChartProps {
-    yearlyData: YearlyData[];
+    readonly yearlyData: YearlyData[];
 }
 
 export default function AssetChart({yearlyData}: AssetChartProps) {
@@ -21,8 +21,8 @@ export default function AssetChart({yearlyData}: AssetChartProps) {
     }
 
     const CustomTooltip = useCallback(({active, payload}: CustomTooltipProps) => {
-        if (active && payload && payload.length) {
-            const data = payload[0].payload;
+        const data = payload?.[0]?.payload;
+        if (active && data) {
             return (
                 <div
                     className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
