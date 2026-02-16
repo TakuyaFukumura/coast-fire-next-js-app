@@ -9,6 +9,7 @@
 開発環境のセットアップから、コーディング規約、テスト、デバッグまで、開発に必要な情報を網羅したガイドです。
 
 **主な内容:**
+
 - 開発環境のセットアップ手順
 - プロジェクト構造の詳細説明
 - コーディング規約（TypeScript、React、Tailwind CSS）
@@ -26,6 +27,7 @@
 システムの設計思想、アーキテクチャパターン、技術選定の理由などを解説したドキュメントです。
 
 **主な内容:**
+
 - システム概要と技術選定の理由
 - アーキテクチャの原則
 - レイヤー構造（表示層、ビジネスロジック層、型定義層）
@@ -45,6 +47,7 @@
 関数、型定義、コンポーネントの詳細な仕様を記載したリファレンスドキュメントです。
 
 **主な内容:**
+
 - 計算ロジック API（`calculateCoastFire`、フォーマット関数）
 - 型定義（`CoastFireInput`、`CoastFireResult`、`YearlyData`）
 - コンポーネント API（Props、使用例）
@@ -74,10 +77,12 @@
 ## 🔗 関連リンク
 
 ### プロジェクトのドキュメント
+
 - [README.md](../README.md) - プロジェクト概要とセットアップ手順
 - [CHANGELOG.md](../CHANGELOG.md) - 変更履歴
 
 ### 外部リソース
+
 - [Next.js ドキュメント](https://nextjs.org/docs)
 - [React ドキュメント](https://react.dev/)
 - [TypeScript ドキュメント](https://www.typescriptlang.org/docs/)

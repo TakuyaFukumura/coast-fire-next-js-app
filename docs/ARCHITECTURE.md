@@ -26,13 +26,13 @@ Coast FIRE Next.js アプリケーションは、老後資産形成計画を支�
 
 ### 技術選定の理由
 
-| 技術 | 選定理由 |
-|------|---------|
-| **Next.js 16** | - React フレームワークのデファクトスタンダード<br>- App Router によるファイルベースルーティング<br>- Turbopack による高速開発体験<br>- Server Components による最適化 |
-| **TypeScript** | - 型安全性による開発時のエラー検出<br>- IDE の補完機能向上<br>- リファクタリングの容易さ |
-| **Tailwind CSS** | - ユーティリティファーストによる高速開発<br>- カスタマイズ性の高さ<br>- レスポンシブデザインの容易な実装 |
-| **Recharts** | - React との高い親和性<br>- 宣言的な API<br>- カスタマイズ可能なチャート |
-| **Jest + RTL** | - React コンポーネントのテストに最適<br>- 充実したコミュニティとドキュメント |
+| 技術               | 選定理由                                                                                                                |
+|------------------|---------------------------------------------------------------------------------------------------------------------|
+| **Next.js 16**   | - React フレームワークのデファクトスタンダード<br>- App Router によるファイルベースルーティング<br>- Turbopack による高速開発体験<br>- Server Components による最適化 |
+| **TypeScript**   | - 型安全性による開発時のエラー検出<br>- IDE の補完機能向上<br>- リファクタリングの容易さ                                                               |
+| **Tailwind CSS** | - ユーティリティファーストによる高速開発<br>- カスタマイズ性の高さ<br>- レスポンシブデザインの容易な実装                                                         |
+| **Recharts**     | - React との高い親和性<br>- 宣言的な API<br>- カスタマイズ可能なチャート                                                                    |
+| **Jest + RTL**   | - React コンポーネントのテストに最適<br>- 充実したコミュニティとドキュメント                                                                       |
 
 ## アーキテクチャの原則
 
@@ -73,16 +73,19 @@ Coast FIRE Next.js アプリケーションは、老後資産形成計画を支�
 **場所**: `src/app/components/`
 
 **責任**:
+
 - UI の描画
 - ユーザーインタラクションの処理
 - ビジネスロジック層への委譲
 
 **特徴**:
+
 - React コンポーネント
 - Client Components (`'use client'`)
 - ビジネスロジックを含まない
 
 **例**:
+
 ```typescript
 // src/app/components/InputForm.tsx
 'use client';
@@ -98,16 +101,19 @@ export default function InputForm({ onCalculate, defaultValues }) {
 **場所**: `lib/`
 
 **責任**:
+
 - Coast FIRE の計算
 - 入力値のバリデーション
 - データの変換・フォーマット
 
 **特徴**:
+
 - React/Next.js に依存しない純粋な TypeScript
 - 100% テストカバレッジ
 - 再利用可能
 
 **例**:
+
 ```typescript
 // lib/coastFireCalculations.ts
 export function calculateCoastFire(input: CoastFireInput): CoastFireResult {
@@ -120,16 +126,19 @@ export function calculateCoastFire(input: CoastFireInput): CoastFireResult {
 **場所**: `src/types/`
 
 **責任**:
+
 - データ構造の定義
 - インターフェースの定義
 - 型の一元管理
 
 **特徴**:
+
 - TypeScript の interface/type のみ
 - ランタイムコードを含まない
 - 各層で共有
 
 **例**:
+
 ```typescript
 // src/types/coastFire.ts
 export interface CoastFireInput {
@@ -209,6 +218,7 @@ export default function CoastFireCalculator() {
 ```
 
 **特徴**:
+
 - 状態を保持
 - 子コンポーネントにデータを渡す
 - ビジネスロジックを呼び出す
@@ -235,6 +245,7 @@ export default function ResultDisplay({ result, targetAmount }: ResultDisplayPro
 ```
 
 **特徴**:
+
 - 状態を持たない（stateless）
 - Props 経由でデータを受け取る
 - 純粋な表示ロジックのみ
@@ -258,6 +269,7 @@ export default function DarkModeProvider({ children }: { children: React.ReactNo
 ```
 
 **特徴**:
+
 - Context API を使用
 - グローバルな状態を管理
 - 子コンポーネントに状態を提供
@@ -316,6 +328,7 @@ const [result, setResult] = useState<CoastFireResult | null>(null);
 ```
 
 **使用場面**:
+
 - コンポーネント内で完結する状態
 - 計算結果や入力値
 
@@ -344,6 +357,7 @@ export function useDarkMode() {
 ```
 
 **使用場面**:
+
 - ダークモード設定
 - ユーザー設定
 - 複数コンポーネントで共有する状態
@@ -389,10 +403,10 @@ src/app/
 
 ```typescript
 // src/app/page.tsx
-import { redirect } from 'next/navigation';
+import {redirect} from 'next/navigation';
 
 export default function Home() {
-  redirect('/coast-fire');
+    redirect('/coast-fire');
 }
 ```
 
@@ -447,13 +461,14 @@ export default function Home() {
 ```typescript
 // デフォルトで Server Component
 export default async function Page() {
-  // サーバーサイドで実行
-  const data = await fetchData();
-  return <div>{data}</div>;
+    // サーバーサイドで実行
+    const data = await fetchData();
+    return <div>{data} < /div>;
 }
 ```
 
 **メリット**:
+
 - JavaScript バンドルサイズの削減
 - 初期レンダリング速度の向上
 
@@ -515,15 +530,15 @@ React は自動的に値をエスケープします：
 
 ```typescript
 function validateInput(input: CoastFireInput): void {
-  // 数値の妥当性チェック
-  if (!Number.isFinite(input.targetAmount)) {
-    throw new Error('無効な入力値');
-  }
-  
-  // 範囲チェック
-  if (input.targetAmount < 100 || input.targetAmount > 100000) {
-    throw new Error('範囲外の値');
-  }
+    // 数値の妥当性チェック
+    if (!Number.isFinite(input.targetAmount)) {
+        throw new Error('無効な入力値');
+    }
+
+    // 範囲チェック
+    if (input.targetAmount < 100 || input.targetAmount > 100000) {
+        throw new Error('範囲外の値');
+    }
 }
 ```
 

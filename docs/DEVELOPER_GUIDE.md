@@ -57,12 +57,14 @@ npm run dev
 #### Visual Studio Code
 
 推奨拡張機能：
+
 - ESLint
 - Tailwind CSS IntelliSense
 - TypeScript and JavaScript Language Features
 - Prettier（オプション）
 
 `.vscode/settings.json` の推奨設定：
+
 ```json
 {
   "editor.formatOnSave": true,
@@ -118,6 +120,7 @@ coast-fire-next-js-app/
 ### ディレクトリの役割
 
 #### `lib/`
+
 ビジネスロジックを含むディレクトリ。フレームワークに依存しない純粋な計算ロジックを配置します。
 
 - **特徴**: React/Next.js に依存しない
@@ -125,6 +128,7 @@ coast-fire-next-js-app/
 - **再利用性**: 高い
 
 #### `src/app/`
+
 Next.js の App Router を使用したページとレイアウトを配置します。
 
 - **ルーティング**: ファイルシステムベース
@@ -132,6 +136,7 @@ Next.js の App Router を使用したページとレイアウトを配置しま
 - **Client Components**: `'use client'` ディレクティブで明示
 
 #### `src/app/components/`
+
 React コンポーネントを配置します。コンポーネントは以下の原則に従います：
 
 - **単一責任の原則**: 各コンポーネントは1つの責任を持つ

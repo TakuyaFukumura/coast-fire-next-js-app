@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import {Metadata} from 'next';
 import CoastFireCalculator from '../components/CoastFireCalculator';
 
 export const metadata: Metadata = {
