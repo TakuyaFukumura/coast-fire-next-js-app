@@ -22,8 +22,8 @@ function calculateCoastFire(input: CoastFireInput): CoastFireResult
 
 #### パラメータ
 
-| 名前 | 型 | 説明 |
-|------|-----|------|
+| 名前      | 型                | 説明            |
+|---------|------------------|---------------|
 | `input` | `CoastFireInput` | 計算に必要な入力パラメータ |
 
 #### 戻り値
@@ -69,20 +69,20 @@ try {
    ```
 
 3. **年齢ごとのデータ計算**
-   - 名目資産額: `現在必要な資産額 × (1 + 運用利回り)^経過年数`
-   - 実質価値: `名目資産額 / (1 + インフレ率)^経過年数`
+    - 名目資産額: `現在必要な資産額 × (1 + 運用利回り)^経過年数`
+    - 実質価値: `名目資産額 / (1 + インフレ率)^経過年数`
 
 #### バリデーション
 
 以下の条件を満たさない場合、エラーをスローします：
 
-| パラメータ | 条件 |
-|-----------|------|
-| `targetAmount` | 100 ≤ x ≤ 100,000（100万円〜10億円） |
-| `currentAge` | 0 ≤ x ≤ 99（0歳〜99歳） |
-| `targetAge` | 30 ≤ x ≤ 100 かつ currentAge < targetAge |
-| `returnRate` | 0 ≤ x ≤ 0.2（0%〜20%） |
-| `inflationRate` | 0 ≤ x ≤ 0.1（0%〜10%） |
+| パラメータ           | 条件                                     |
+|-----------------|----------------------------------------|
+| `targetAmount`  | 100 ≤ x ≤ 100,000（100万円〜10億円）          |
+| `currentAge`    | 0 ≤ x ≤ 99（0歳〜99歳）                     |
+| `targetAge`     | 30 ≤ x ≤ 100 かつ currentAge < targetAge |
+| `returnRate`    | 0 ≤ x ≤ 0.2（0%〜20%）                    |
+| `inflationRate` | 0 ≤ x ≤ 0.1（0%〜10%）                    |
 
 すべての値は有限の数値である必要があります（NaN、Infinity は不可）。
 
@@ -100,8 +100,8 @@ function formatAmount(amount: number): string
 
 #### パラメータ
 
-| 名前 | 型 | 説明 |
-|------|-----|------|
+| 名前       | 型        | 説明              |
+|----------|----------|-----------------|
 | `amount` | `number` | フォーマット対象の金額（万円） |
 
 #### 戻り値
@@ -132,10 +132,10 @@ function formatPercentage(rate: number, decimalPlaces?: number): string
 
 #### パラメータ
 
-| 名前 | 型 | デフォルト | 説明 |
-|------|-----|-----------|------|
-| `rate` | `number` | - | フォーマット対象の割合（小数、例: 0.05） |
-| `decimalPlaces` | `number` | `2` | 小数点以下の桁数 |
+| 名前              | 型        | デフォルト | 説明                      |
+|-----------------|----------|-------|-------------------------|
+| `rate`          | `number` | -     | フォーマット対象の割合（小数、例: 0.05） |
+| `decimalPlaces` | `number` | `2`   | 小数点以下の桁数                |
 
 #### 戻り値
 
@@ -302,7 +302,7 @@ Coast FIRE 計算機のメインコンテナコンポーネントです。
 import CoastFireCalculator from '@/app/components/CoastFireCalculator';
 
 export default function Page() {
-  return <CoastFireCalculator />;
+    return <CoastFireCalculator / >;
 }
 ```
 
@@ -322,11 +322,11 @@ export default function Page() {
 
 ```typescript
 interface InputFormProps {
-  /** 計算実行時のコールバック */
-  onCalculate: (input: CoastFireInput) => void;
-  
-  /** 初期値（省略可能、デフォルトは DEFAULT_INPUT） */
-  defaultValues?: CoastFireInput;
+    /** 計算実行時のコールバック */
+    onCalculate: (input: CoastFireInput) => void;
+
+    /** 初期値（省略可能、デフォルトは DEFAULT_INPUT） */
+    defaultValues?: CoastFireInput;
 }
 ```
 
@@ -605,15 +605,15 @@ Error: useDarkMode must be used within a DarkModeProvider
 
 #### エラーメッセージの例
 
-| エラー | 説明 |
-|--------|------|
-| `目標資産額には有限の数値を入力してください` | NaN または Infinity が入力された |
-| `目標資産額は正の値を入力してください` | 0 以下の値が入力された |
-| `目標資産額は100万円から10億円の範囲で入力してください` | 範囲外の値 |
-| `現在の年齢は0歳から99歳の範囲で入力してください` | 範囲外の年齢 |
-| `目標達成年齢は現在の年齢より大きい値を入力してください` | 目標年齢 ≤ 現在年齢 |
-| `運用利回りは0%から20%の範囲で入力してください` | 範囲外の利回り |
-| `インフレ率は0%から10%の範囲で入力してください` | 範囲外のインフレ率 |
+| エラー                             | 説明                      |
+|---------------------------------|-------------------------|
+| `目標資産額には有限の数値を入力してください`         | NaN または Infinity が入力された |
+| `目標資産額は正の値を入力してください`            | 0 以下の値が入力された            |
+| `目標資産額は100万円から10億円の範囲で入力してください` | 範囲外の値                   |
+| `現在の年齢は0歳から99歳の範囲で入力してください`     | 範囲外の年齢                  |
+| `目標達成年齢は現在の年齢より大きい値を入力してください`   | 目標年齢 ≤ 現在年齢             |
+| `運用利回りは0%から20%の範囲で入力してください`     | 範囲外の利回り                 |
+| `インフレ率は0%から10%の範囲で入力してください`     | 範囲外のインフレ率               |
 
 #### エラーハンドリングの例
 
@@ -686,6 +686,7 @@ import { useDarkMode } from '@/app/components/DarkModeProvider';
 ## 変更履歴
 
 ### v1.0.0 (2026-02-15)
+
 - 初版リリース
 - Coast FIRE 計算機能の実装
 - 基本的なコンポーネント API の定義

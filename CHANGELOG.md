@@ -12,21 +12,21 @@
 ### 変更
 
 - README.mdの更新
-  - プロジェクト構造セクションを現在の実装に合わせて更新（全コンポーネントとテストファイルを反映）
-  - Turbopack使用についての説明を追加
+    - プロジェクト構造セクションを現在の実装に合わせて更新（全コンポーネントとテストファイルを反映）
+    - Turbopack使用についての説明を追加
 - メタデータの更新
-  - アプリケーションタイトルを「基本Next.jsアプリ」から「Coast FIRE計算機」に変更
-  - アプリケーション説明を現在の機能（Coast FIRE計算機）に合わせて更新
+    - アプリケーションタイトルを「基本Next.jsアプリ」から「Coast FIRE計算機」に変更
+    - アプリケーション説明を現在の機能（Coast FIRE計算機）に合わせて更新
 - 入力パラメータの範囲設定
 
 ### 削除
 
 - 未使用の SVG ファイルを削除（Next.js初期テンプレートの残存ファイル）
-  - `public/file.svg`
-  - `public/globe.svg`
-  - `public/next.svg`
-  - `public/vercel.svg`
-  - `public/window.svg`
+    - `public/file.svg`
+    - `public/globe.svg`
+    - `public/next.svg`
+    - `public/vercel.svg`
+    - `public/window.svg`
 - 実装後不要になった検討ドキュメント（`docs/unnecessary-files-removal-plan.md`）
 
 ## [0.3.0] - 2026-02-15
@@ -35,9 +35,9 @@
 
 - ホーム画面を削除し、ルートパスから Coast FIRE 計算機ページへのリダイレクトを実装
 - SQLite データベース関連機能の削除
-  - `lib/database.ts`
-  - `src/app/api/message/route.ts`
-  - データベース関連の依存関係（`better-sqlite3`, `@types/better-sqlite3`）
+    - `lib/database.ts`
+    - `src/app/api/message/route.ts`
+    - データベース関連の依存関係（`better-sqlite3`, `@types/better-sqlite3`）
 - ヘッダーのナビゲーションから「ホーム」リンクを削除
 - 実装後不要になった検討ドキュメント（`docs/home-screen-removal-consideration.md`）
 
