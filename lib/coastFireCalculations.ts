@@ -113,7 +113,7 @@ function validateInput(input: CoastFireInput): void {
 
     // 目標達成年齢は正の値
     if (targetAge < 1) {
-        throw new Error('目標達成年齢は1以上の値を入力してください');
+        throw new Error('目標達成年齢は1歳から100歳の範囲で入力してください');
     }
 
     // 目標達成年齢 > 現在の年齢（先にこのチェックを行う）
