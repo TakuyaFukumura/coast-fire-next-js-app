@@ -76,7 +76,7 @@ number input の下に、range input を追加します。
 | 属性 | 値 | 説明 |
 |------|-----|------|
 | `type` | `"range"` | スライダー形式の入力 |
-| `value` | `Number.isNaN(currentAge) ? 28 : currentAge` | デフォルト値は28歳 |
+| `value` | `Number.isNaN(currentAge) ? DEFAULT_INPUT.currentAge : currentAge` | デフォルト値は `DEFAULT_INPUT.currentAge` |
 | `min` | `0` | 最小値: 0歳 |
 | `max` | `99` | 最大値: 99歳 |
 | `step` | `1` | ステップ: 1歳単位 |
@@ -103,7 +103,7 @@ onChange={(e) => setCurrentAge(Number(e.target.value))}
 
 - number input と range input は双方向で連動
 - どちらを操作しても、もう一方の値も更新される
-- 無効な値（NaN）の場合、デフォルト値（28歳）を表示
+- 初期値は `DEFAULT_INPUT.currentAge`（現状は28歳）を使用
 
 #### バリデーション
 
@@ -146,7 +146,7 @@ onChange={(e) => setCurrentAge(Number(e.target.value))}
     />
     <input
         type="range"
-        value={Number.isNaN(currentAge) ? 28 : currentAge}
+        value={Number.isNaN(currentAge) ? DEFAULT_INPUT.currentAge : currentAge}
         onChange={(e) => setCurrentAge(Number(e.target.value))}
         min={0}
         max={99}
@@ -235,7 +235,7 @@ onChange={(e) => setCurrentAge(Number(e.target.value))}
 
 - `src/app/components/InputForm.tsx`: 入力フォームコンポーネント
 - `src/types/coastFire.ts`: 型定義とデフォルト値
-- `__tests__/components/InputForm.test.tsx`: 入力フォームのテスト（存在する場合）
+- `__tests__/src/app/components/InputForm.test.tsx`: 入力フォームのテスト（将来的に追加予定）
 
 ### 類似実装の参考箇所
 
