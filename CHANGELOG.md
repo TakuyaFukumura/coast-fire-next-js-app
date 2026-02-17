@@ -7,6 +7,18 @@
 
 ## [Unreleased]
 
+## [0.5.2] - 2026-02-17
+
+### 追加
+
+- 現在の年齢欄にrange input（スライダー）を追加
+    - 他のフィールドと同様のUI/UX統一性を実現
+    - number inputとrange inputが双方向で連動
+
+### 削除
+
+- 実装後不要になった仕様書ドキュメント (`docs/current-age-range-input-specification.md`)
+
 ## [0.5.1] - 2026-02-17
 
 ### 変更
@@ -100,7 +112,11 @@
 
 - 雛形アプリの初期設定
 
-[unreleased]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.5.0...HEAD
+[unreleased]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.5.2...HEAD
+
+[0.5.2]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.5.1...v0.5.2
+
+[0.5.1]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.5.0...v0.5.1
 
 [0.5.0]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.4.0...v0.5.0
 
