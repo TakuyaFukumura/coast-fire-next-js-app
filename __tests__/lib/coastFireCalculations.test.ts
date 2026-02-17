@@ -3,7 +3,7 @@
  */
 
 import {calculateCoastFire, formatAmount, formatPercentage} from '../../lib/coastFireCalculations';
-import {CoastFireInput} from '../../src/types/coastFire';
+import {CoastFireInput} from '@/types/coastFire';
 
 describe('Coast FIRE Calculations', () => {
     describe('calculateCoastFire', () => {
@@ -142,7 +142,7 @@ describe('Coast FIRE Calculations', () => {
                     inflationRate: 0.02,
                 };
 
-                expect(() => calculateCoastFire(input)).toThrow('目標資産額は100万円から10億円の範囲で入力してください');
+                expect(() => calculateCoastFire(input)).toThrow('目標資産額は100万円から1億円の範囲で入力してください');
             });
 
             it('目標達成年齢が現在の年齢以下の場合エラー', () => {
@@ -184,13 +184,13 @@ describe('Coast FIRE Calculations', () => {
             it('目標達成年齢が範囲外の場合エラー', () => {
                 const input: CoastFireInput = {
                     targetAmount: 2000,
-                    targetAge: 25, // 30歳未満
+                    targetAge: 0, // 1歳未満
                     currentAge: 20,
                     returnRate: 0.05,
                     inflationRate: 0.02,
                 };
 
-                expect(() => calculateCoastFire(input)).toThrow('目標達成年齢は30歳から100歳の範囲で入力してください');
+                expect(() => calculateCoastFire(input)).toThrow('目標達成年齢は1歳から100歳の範囲で入力してください');
             });
 
             it('運用利回りが負の値の場合エラー', () => {
@@ -202,7 +202,7 @@ describe('Coast FIRE Calculations', () => {
                     inflationRate: 0.02,
                 };
 
-                expect(() => calculateCoastFire(input)).toThrow('運用利回りは0%から20%の範囲で入力してください');
+                expect(() => calculateCoastFire(input)).toThrow('運用利回りは0%から10%の範囲で入力してください');
             });
 
             it('運用利回りが範囲外の場合エラー', () => {
@@ -214,7 +214,7 @@ describe('Coast FIRE Calculations', () => {
                     inflationRate: 0.02,
                 };
 
-                expect(() => calculateCoastFire(input)).toThrow('運用利回りは0%から20%の範囲で入力してください');
+                expect(() => calculateCoastFire(input)).toThrow('運用利回りは0%から10%の範囲で入力してください');
             });
 
             it('インフレ率が範囲外の場合エラー', () => {
@@ -226,7 +226,7 @@ describe('Coast FIRE Calculations', () => {
                     inflationRate: 0.15, // 10%を超える
                 };
 
-                expect(() => calculateCoastFire(input)).toThrow('インフレ率は0%から10%の範囲で入力してください');
+                expect(() => calculateCoastFire(input)).toThrow('インフレ率は0%から5%の範囲で入力してください');
             });
         });
     });

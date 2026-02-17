@@ -102,8 +102,8 @@ function validateInput(input: CoastFireInput): void {
     }
 
     // 目標資産額の範囲チェック（100万円〜10億円）
-    if (targetAmount < 100 || targetAmount > 100000) {
-        throw new Error('目標資産額は100万円から10億円の範囲で入力してください');
+    if (targetAmount < 100 || targetAmount > 10000) {
+        throw new Error('目標資産額は100万円から1億円の範囲で入力してください');
     }
 
     // 現在の年齢の範囲チェック（0歳〜99歳）
@@ -112,8 +112,8 @@ function validateInput(input: CoastFireInput): void {
     }
 
     // 目標達成年齢は正の値
-    if (targetAge < 0) {
-        throw new Error('目標達成年齢は0以上の値を入力してください');
+    if (targetAge < 1) {
+        throw new Error('目標達成年齢は1歳から100歳の範囲で入力してください');
     }
 
     // 目標達成年齢 > 現在の年齢（先にこのチェックを行う）
@@ -121,19 +121,19 @@ function validateInput(input: CoastFireInput): void {
         throw new Error('目標達成年齢は現在の年齢より大きい値を入力してください');
     }
 
-    // 目標達成年齢の範囲チェック（30歳〜100歳）
-    if (targetAge < 30 || targetAge > 100) {
-        throw new Error('目標達成年齢は30歳から100歳の範囲で入力してください');
+    // 目標達成年齢の範囲チェック（1歳〜100歳）
+    if (targetAge < 1 || targetAge > 100) {
+        throw new Error('目標達成年齢は1歳から100歳の範囲で入力してください');
     }
 
-    // 運用利回りの範囲チェック（0%〜20%）
-    if (returnRate < 0 || returnRate > 0.2) {
-        throw new Error('運用利回りは0%から20%の範囲で入力してください');
+    // 運用利回りの範囲チェック（0%〜10%）
+    if (returnRate < 0 || returnRate > 0.1) {
+        throw new Error('運用利回りは0%から10%の範囲で入力してください');
     }
 
-    // インフレ率の範囲チェック（0%〜10%）
-    if (inflationRate < 0 || inflationRate > 0.1) {
-        throw new Error('インフレ率は0%から10%の範囲で入力してください');
+    // インフレ率の範囲チェック（0%〜5%）
+    if (inflationRate < 0 || inflationRate > 0.05) {
+        throw new Error('インフレ率は0%から5%の範囲で入力してください');
     }
 }
 
