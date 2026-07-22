@@ -9,38 +9,38 @@ interface AssetChartProps {
     readonly yearlyData: YearlyData[];
 }
 
+interface TooltipPayload {
+    payload: YearlyData;
+}
+
+interface CustomTooltipProps {
+    active?: boolean;
+    payload?: TooltipPayload[];
+}
+
+function CustomTooltip({active, payload}: CustomTooltipProps) {
+    const data = payload?.[0]?.payload;
+    if (active && data) {
+        return (
+            <div
+                className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+                <p className="font-semibold text-gray-800 dark:text-gray-200 mb-2">{data.age}歳</p>
+                <p className="text-sm text-blue-600 dark:text-blue-400">
+                    名目資産額: {formatAmount(data.amount)}
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                    実質価値: {formatAmount(data.inflationAdjusted)}
+                </p>
+                <p className="text-sm text-green-600 dark:text-green-400">
+                    実質利回り累計: {data.realReturn.toFixed(1)}%
+                </p>
+            </div>
+        );
+    }
+    return null;
+}
+
 export default function AssetChart({yearlyData}: AssetChartProps) {
-    // カスタムツールチップ
-    interface TooltipPayload {
-        payload: YearlyData;
-    }
-
-    interface CustomTooltipProps {
-        active?: boolean;
-        payload?: TooltipPayload[];
-    }
-
-    const CustomTooltip = useCallback(({active, payload}: CustomTooltipProps) => {
-        const data = payload?.[0]?.payload;
-        if (active && data) {
-            return (
-                <div
-                    className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
-                    <p className="font-semibold text-gray-800 dark:text-gray-200 mb-2">{data.age}歳</p>
-                    <p className="text-sm text-blue-600 dark:text-blue-400">
-                        名目資産額: {formatAmount(data.amount)}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                        実質価値: {formatAmount(data.inflationAdjusted)}
-                    </p>
-                    <p className="text-sm text-green-600 dark:text-green-400">
-                        実質利回り累計: {data.realReturn.toFixed(1)}%
-                    </p>
-                </div>
-            );
-        }
-        return null;
-    }, []);
 
     // Y軸のフォーマット関数
     const formatYAxis = useCallback((value: number) => {
