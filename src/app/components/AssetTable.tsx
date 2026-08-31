@@ -120,7 +120,7 @@ export default function AssetTable({yearlyData}: Readonly<AssetTableProps>) {
                             tabIndex={0}
                             aria-sort={getAriaSort('realReturn')}
                         >
-                            初期資産比の実質増加率（累計） <SortIcon field="realReturn" sortField={sortField}
+                            実質増加率 <SortIcon field="realReturn" sortField={sortField}
                                                      sortDirection={sortDirection}/>
                         </th>
                     </tr>

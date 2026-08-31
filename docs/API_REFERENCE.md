@@ -240,7 +240,7 @@ interface YearlyData {
   /** インフレ調整後価値（実質、万円） */
   inflationAdjusted: number;
   
-  /** 初期資産比の実質増加率（%） - 開始時点からの累積実質増加率 */
+  /** 実質増加率（%） - 開始時点からの累積実質増加率 */
   realReturn: number;
 }
 ```
