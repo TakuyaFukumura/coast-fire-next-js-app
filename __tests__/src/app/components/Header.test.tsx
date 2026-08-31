@@ -2,7 +2,7 @@
  * Header コンポーネントのテスト
  *
  * このテストファイルは、src/app/components/Header.tsxの機能をテストします。
- * ダークモード/ライトモードの切り替えボタンとヘッダーの表示をテストしています。
+ * テーマ切り替えボタンとヘッダーの表示をテストしています。
  */
 
 import React from 'react';
@@ -42,7 +42,7 @@ describe('Header', () => {
         it('テーマ切り替えボタンが表示される', () => {
             renderWithProvider();
 
-            const button = screen.getByRole('button', {name: /ライトモード|ダークモード/});
+            const button = screen.getByRole('button', {name: 'テーマを切り替え'});
             expect(button).toBeInTheDocument();
         });
     });
@@ -54,17 +54,17 @@ describe('Header', () => {
             expect(screen.getByText('☀️')).toBeInTheDocument();
         });
 
-        it('ライトモード時のラベルが表示される', () => {
+        it('ライトモード時にテーマラベルを表示しない', () => {
             renderWithProvider('light');
 
-            expect(screen.getByText('ライトモード')).toBeInTheDocument();
+            expect(screen.queryByText('ライトモード')).not.toBeInTheDocument();
         });
 
         it('ボタンのtitle属性が正しく設定される', () => {
             renderWithProvider('light');
 
-            const button = screen.getByRole('button', {name: /ライトモード/});
-            expect(button).toHaveAttribute('title', '現在: ライトモード');
+            const button = screen.getByRole('button', {name: 'テーマを切り替え'});
+            expect(button).toHaveAttribute('title', 'テーマを切り替え');
         });
     });
 
@@ -76,18 +76,18 @@ describe('Header', () => {
             expect(screen.getByText('🌙')).toBeInTheDocument();
         });
 
-        it('ダークモード時のラベルが表示される', () => {
+        it('ダークモード時にテーマラベルを表示しない', () => {
             window.localStorage.setItem('theme', 'dark');
             renderWithProvider();
 
-            expect(screen.getByText('ダークモード')).toBeInTheDocument();
+            expect(screen.queryByText('ダークモード')).not.toBeInTheDocument();
         });
 
         it('ボタンのtitle属性が正しく設定される', () => {
             renderWithProvider('dark');
 
-            const button = screen.getByRole('button', {name: /ダークモード/});
-            expect(button).toHaveAttribute('title', '現在: ダークモード');
+            const button = screen.getByRole('button', {name: 'テーマを切り替え'});
+            expect(button).toHaveAttribute('title', 'テーマを切り替え');
         });
     });
 
@@ -98,15 +98,14 @@ describe('Header', () => {
 
             // 初期状態の確認
             expect(screen.getByText('☀️')).toBeInTheDocument();
-            expect(screen.getByText('ライトモード')).toBeInTheDocument();
 
             // ボタンをクリック
-            const button = screen.getByRole('button', {name: /ライトモード/});
+            const button = screen.getByRole('button', {name: 'テーマを切り替え'});
             fireEvent.click(button);
 
             // ダークモードに変更されたことを確認
             expect(screen.getByText('🌙')).toBeInTheDocument();
-            expect(screen.getByText('ダークモード')).toBeInTheDocument();
+            expect(screen.queryByText('ダークモード')).not.toBeInTheDocument();
         });
 
         it('ダークモードからライトモードに切り替わる', () => {
@@ -114,33 +113,32 @@ describe('Header', () => {
 
             // 初期状態の確認
             expect(screen.getByText('🌙')).toBeInTheDocument();
-            expect(screen.getByText('ダークモード')).toBeInTheDocument();
 
             // ボタンをクリック
-            const button = screen.getByRole('button', {name: /ダークモード/});
+            const button = screen.getByRole('button', {name: 'テーマを切り替え'});
             fireEvent.click(button);
 
             // ライトモードに変更されたことを確認
             expect(screen.getByText('☀️')).toBeInTheDocument();
-            expect(screen.getByText('ライトモード')).toBeInTheDocument();
+            expect(screen.queryByText('ライトモード')).not.toBeInTheDocument();
         });
 
         it('複数回のクリックで正しく切り替わる', () => {
             renderWithProvider('light');
 
-            let button = screen.getByRole('button', {name: /ライトモード/});
+            let button = screen.getByRole('button', {name: 'テーマを切り替え'});
 
             // ライトモード → ダークモード
             fireEvent.click(button);
             expect(screen.getByText('🌙')).toBeInTheDocument();
 
             // ダークモード → ライトモード
-            button = screen.getByRole('button', {name: /ダークモード/});
+            button = screen.getByRole('button', {name: 'テーマを切り替え'});
             fireEvent.click(button);
             expect(screen.getByText('☀️')).toBeInTheDocument();
 
             // ライトモード → ダークモード
-            button = screen.getByRole('button', {name: /ライトモード/});
+            button = screen.getByRole('button', {name: 'テーマを切り替え'});
             fireEvent.click(button);
             expect(screen.getByText('🌙')).toBeInTheDocument();
         });
@@ -150,7 +148,7 @@ describe('Header', () => {
         it('ボタンがキーボードでアクセス可能', () => {
             renderWithProvider();
 
-            const button = screen.getByRole('button', {name: /ライトモード|ダークモード/});
+            const button = screen.getByRole('button', {name: 'テーマを切り替え'});
             expect(button).toBeInTheDocument();
 
             // タブキーでフォーカス可能かを確認
@@ -161,11 +159,9 @@ describe('Header', () => {
         it('適切なaria属性が設定されている', () => {
             renderWithProvider();
 
-            const button = screen.getByRole('button', {name: /ライトモード|ダークモード/});
+            const button = screen.getByRole('button', {name: 'テーマを切り替え'});
 
-            // title属性による説明があることを確認
-            expect(button).toHaveAttribute('title');
-            expect(button.getAttribute('title')).toContain('現在:');
+            expect(button).toHaveAccessibleName('テーマを切り替え');
         });
     });
 
@@ -175,10 +171,9 @@ describe('Header', () => {
             renderWithProvider();
         });
 
-        it('テキストラベルが適切なクラスで制御されている', () => {
-            // 'hidden sm:inline' クラスでモバイルでは非表示になることを想定
-            const textLabel = screen.getByText('ライトモード');
-            expect(textLabel).toHaveClass('hidden', 'sm:inline');
+        it('テーマラベルを表示しない', () => {
+            expect(screen.queryByText('ライトモード')).not.toBeInTheDocument();
+            expect(screen.queryByText('ダークモード')).not.toBeInTheDocument();
         });
 
         it('アイコンが常に表示される', () => {
@@ -199,7 +194,7 @@ describe('Header', () => {
         it('ボタンに適切なスタイルクラスが適用される', () => {
             renderWithProvider();
 
-            const button = screen.getByRole('button', {name: /ライトモード|ダークモード/});
+            const button = screen.getByRole('button', {name: 'テーマを切り替え'});
             expect(button).toHaveClass('flex', 'items-center', 'gap-2');
         });
     });
