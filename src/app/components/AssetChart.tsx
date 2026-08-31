@@ -32,7 +32,7 @@ function CustomTooltip({active, payload}: CustomTooltipProps) {
                     実質価値: {formatAmount(data.inflationAdjusted)}
                 </p>
                 <p className="text-sm text-green-600 dark:text-green-400">
-                    実質資産増加率（累計）: {data.realReturn.toFixed(1)}%
+                    累積実質増加率: {data.realReturn.toFixed(1)}%
                 </p>
             </div>
         );

@@ -177,7 +177,7 @@ for (let age = currentAge; age <= targetAge; age++) {
     // インフレ調整後価値（実質）
     const inflationAdjusted = amount / Math.pow(1 + inflationRate, yearsElapsed);
     
-    // 実質資産増加率（開始時点からの累計）
+    // 累積実質増加率
     const realReturn = yearsElapsed === 0 ? 0 : ((inflationAdjusted / requiredAmount) - 1) * 100;
 }
 ```
@@ -193,7 +193,7 @@ for (let age = currentAge; age <= targetAge; age++) {
     - 数式: `名目額 / (1 + インフレ率)^年数`
     - ✅ 正確
 
-3. **実質資産増加率（累計） (realReturn)**
+3. **累積実質増加率 (realReturn)**
     - 開始時点の実質価値に対する累積実質増加率（パーセント表示）
     - 数式: `((現在の実質価値 / 開始時の実質価値) - 1) × 100`
     - ✅ 正確
