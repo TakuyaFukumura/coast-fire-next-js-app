@@ -7,6 +7,12 @@
 
 ## [Unreleased]
 
+## [0.5.3] - 2026-08-31
+
+### 修正
+
+- テーマ切り替えボタンのHydration mismatchを解消
+
 ## [0.5.2] - 2026-02-17
 
 ### 追加
@@ -127,4 +133,3 @@
 [0.2.0]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.1.0...v0.2.0
 
 [0.1.0]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.1.0^...v0.1.0
-
