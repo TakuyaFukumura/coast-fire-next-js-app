@@ -74,7 +74,7 @@ export default function CoastFireCalculator() {
                                 <AssetChart yearlyData={result.yearlyData}/>
 
                                 {/* テーブル */}
-                                <AssetTable yearlyData={result.yearlyData}/>
+                                <AssetTable key={JSON.stringify(result.yearlyData)} yearlyData={result.yearlyData}/>
                             </>
                         )}
                     </div>
