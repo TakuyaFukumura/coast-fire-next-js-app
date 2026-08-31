@@ -7,6 +7,12 @@
 
 ## [Unreleased]
 
+## [0.5.10] - 2026-08-31
+
+### 変更
+
+- アプリケーション名を「c-fire」から「coast-fire」に変更
+
 ## [0.5.9] - 2026-08-31
 
 ### 変更
@@ -154,7 +160,8 @@
 
 - 雛形アプリの初期設定
 
-[unreleased]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.5.2...HEAD
+[unreleased]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.5.10...HEAD
+[0.5.10]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.5.9...v0.5.10
 
 [0.5.2]: https://github.com/TakuyaFukumura/coast-fire-next-js-app/compare/v0.5.1...v0.5.2
 

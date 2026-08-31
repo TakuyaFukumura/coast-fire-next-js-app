@@ -28,7 +28,7 @@ describe('Header', () => {
         it('ヘッダータイトルが表示される', () => {
             renderWithProvider();
 
-            expect(screen.getByText('c-fire')).toBeInTheDocument();
+            expect(screen.getByText('coast-fire')).toBeInTheDocument();
         });
 
         it('ヘッダーのHTML構造が正しい', () => {
