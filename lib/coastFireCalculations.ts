@@ -50,7 +50,7 @@ export function calculateCoastFire(input: CoastFireInput): CoastFireResult {
         // インフレ調整後価値（実質）
         const inflationAdjusted = amount / Math.pow(1 + inflationRate, yearsElapsed);
 
-        // 実質利回り累計（%）
+        // 初期資産比の実質増加率（累計）
         const realReturn = yearsElapsed === 0 ? 0 : ((inflationAdjusted / requiredAmount) - 1) * 100;
 
         yearlyData.push({
